@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_width">150dp</dimen>
+    <dimen name="button_height">30dp</dimen>
+    <dimen name="page_margin">10dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <!-- Account Card -->
+    <dimen name="card_account_margin">10dp</dimen>
+    <dimen name="card_account_padding">5dp</dimen>
+    <!--<dimen name="card_account_width">350dp</dimen>-->
+    <dimen name="card_account_height">100dp</dimen>
+    <dimen name="card_account_phone">100dp</dimen>
+    <dimen name="card_account_name">100dp</dimen>
+    <dimen name="card_account_deposit_label">100dp</dimen>
+    <dimen name="card_account_deposit">100dp</dimen>
+    <dimen name="card_account_due_label">100dp</dimen>
+    <dimen name="card_account_due">100dp</dimen>
+    <dimen name="card_account_elevation">5dp</dimen>
+    <dimen name="card_account_corner_radius">4dp</dimen>
+    <!-- Account Card -->
+
+</resources>

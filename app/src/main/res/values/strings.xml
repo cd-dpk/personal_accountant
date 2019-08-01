@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PA</string>
+    <string name="welcome_msg">Hi! I am your Personal Accountant!\n You can call me PA!</string>
+    <string name="account_open_msg">Open New Account!</string>
+    <string name="account_open_phone_display">Type Account Person Phone</string>
+    <string name="account_open_name_display">Type Account Person Name</string>
+    <string name="title_activity_account_list">Accounts</string>
+    <string name="deposit_label">Deposit</string>
+    <string name="due_label">Due</string>
+
+</resources>

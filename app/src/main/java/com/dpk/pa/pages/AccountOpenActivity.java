@@ -1,0 +1,49 @@
+package com.dpk.pa.pages;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.dpk.pa.R;
+
+public class AccountOpenActivity extends AppCompatActivity {
+    EditText phoneText, nameText;
+    Button okayButton;
+    String phone="", name="";
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_account_open);
+
+        phoneText = (EditText) findViewById(R.id.edit_text_phone_number_open);
+        nameText = (EditText) findViewById(R.id.edit_text_name_open);
+        okayButton = findViewById(R.id.button_open);
+
+        okayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                phone = phoneText.getText().toString();
+                name = nameText.getText().toString();
+                if (phone.equals("") && name.equals("")){
+                    Toast.makeText(AccountOpenActivity.this, "Please enter Phone and Name Correctly!",
+                            Toast.LENGTH_LONG).show();
+                }
+                else if (phone.equals("")){
+                    Toast.makeText(AccountOpenActivity.this, "Please enter Phone Correctly!",
+                            Toast.LENGTH_LONG).show();
+                }
+                else if (name.equals("")){
+                    Toast.makeText(AccountOpenActivity.this, "Please enter Phone Correctly!",
+                            Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(AccountOpenActivity.this, "Correct!",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+}
