@@ -1,6 +1,6 @@
 package com.dpk.pa.data_models;
 
-public class Account {
+public class Account{
     private String phone, name;
     private double deposit, due;
 

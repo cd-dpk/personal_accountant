@@ -7,5 +7,6 @@
     <string name="title_activity_account_list">Accounts</string>
     <string name="deposit_label">Deposit</string>
     <string name="due_label">Due</string>
+    <string name="title_activity_transaction_list">TransactionListActivity</string>
 
 </resources>

@@ -3,12 +3,16 @@ package com.dpk.pa.pages;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.dpk.pa.PersonalAccountant;
 import com.dpk.pa.R;
+import com.dpk.pa.data.constants.ApplicationConstants;
+import com.dpk.pa.data_models.db.AccountTable;
 
 public class AccountOpenActivity extends AppCompatActivity {
     EditText phoneText, nameText;
@@ -42,6 +46,11 @@ public class AccountOpenActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(AccountOpenActivity.this, "Correct!",Toast.LENGTH_LONG).show();
+                    AccountTable accountTable = new AccountTable(phone, name);
+                    PersonalAccountant personalAccountant = new PersonalAccountant(AccountOpenActivity.this);
+                    if (personalAccountant.insertAccountIntoDB(accountTable)){
+                        Log.d("PA", ApplicationConstants.PHONE_NUMBER);
+                    }
                 }
             }
         });

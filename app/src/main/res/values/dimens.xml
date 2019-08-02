@@ -4,7 +4,7 @@
     <dimen name="button_height">30dp</dimen>
     <dimen name="page_margin">10dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <!-- Account Card -->
+    <!-- AccountTable Card -->
     <dimen name="card_account_margin">10dp</dimen>
     <dimen name="card_account_padding">5dp</dimen>
     <!--<dimen name="card_account_width">350dp</dimen>-->
@@ -17,6 +17,6 @@
     <dimen name="card_account_due">100dp</dimen>
     <dimen name="card_account_elevation">5dp</dimen>
     <dimen name="card_account_corner_radius">4dp</dimen>
-    <!-- Account Card -->
+    <!-- AccountTable Card -->
 
 </resources>
