@@ -47,7 +47,7 @@ public class PersonalAccountant {
     public List<AccountTable> getAllAccounts(){
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         List<ITable> iTables = dataBaseHelper.selectRows(new AccountTable());
-        return new ArrayList<AccountTable>();
+        return new AccountTable().toAccountTables(iTables);
     }
     public boolean insertTransactionIntoDB(TransactionTable transactionTable){
         return false;

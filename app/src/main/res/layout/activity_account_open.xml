@@ -40,14 +40,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/account_open_phone_display"
-                    android:layout_weight="1"/>
+                    android:layout_weight="0.75"
+                    />
                 <EditText
                     android:id="@+id/edit_text_phone_number_open"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
                     android:hint="Phone Number"
-                    android:layout_weight="1"/>
+                    android:layout_weight="0.75"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/name_group"
@@ -60,12 +61,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/account_open_name_display"
-                    android:layout_weight="1"/>
+                    android:layout_weight="0.75"/>
                 <EditText
                     android:id="@+id/edit_text_name_open"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.75"
                     android:singleLine="true"
                     android:hint="Name"/>
             </LinearLayout>

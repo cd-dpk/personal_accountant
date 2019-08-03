@@ -8,5 +8,17 @@
     <string name="deposit_label">Deposit</string>
     <string name="due_label">Due</string>
     <string name="title_activity_transaction_list">TransactionListActivity</string>
+    <string name="giver_label">Giver</string>
+    <string name="taker_label">Taker</string>
+    <string name="transaction_type_give">Give</string>
+    <string name="transaction_type_take">Take</string>
+    <string name="transaction_attr_amount">Amount</string>
+    <string name="description_label">Description</string>
+    <string name="button_transaction_add">Add</string>
+    <string name="transaction_type_passive_given">Given To</string>
+    <string name="transaction_type_passive_taken">Taken From</string>
+    <string name="account_attr_phone">Phone</string>
+    <string name="account_attr_name">Name</string>
+    <string name="amount_label">Amount</string>
 
 </resources>

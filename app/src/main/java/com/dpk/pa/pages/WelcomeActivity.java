@@ -29,8 +29,11 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
+//        DANGER STATEMENT
+//        this.deleteDatabase(DataBaseHelper.DATABASE_NAME);
+
         if (isRegistered()){
-            Intent intent = new Intent(WelcomeActivity.this, AccountOpenActivity.class);
+            Intent intent = new Intent(WelcomeActivity.this, AccountListActivity.class);
             startActivity(intent);
         }
 

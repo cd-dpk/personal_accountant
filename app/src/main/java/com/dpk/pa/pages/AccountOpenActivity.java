@@ -2,6 +2,7 @@ package com.dpk.pa.pages;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,9 +51,16 @@ public class AccountOpenActivity extends AppCompatActivity {
                     PersonalAccountant personalAccountant = new PersonalAccountant(AccountOpenActivity.this);
                     if (personalAccountant.insertAccountIntoDB(accountTable)){
                         Log.d("PA", ApplicationConstants.PHONE_NUMBER);
+                        Intent intent = new Intent(AccountOpenActivity.this, AccountListActivity.class);
+                        startActivity(intent);
                     }
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

@@ -3,6 +3,8 @@ package com.dpk.pa.data_models.db;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import com.dpk.pa.security.AppSecurityManager;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -130,7 +132,7 @@ public class TransactionTable implements ITable{
     @Override
     public String toCreateTableString() {
         return "create table if not exists "+tableName()+" ("+
-                Variable.STRING_TRANSACTION_ID+" integer," +
+                Variable.STRING_TRANSACTION_ID+" text," +
                 Variable.STRING_GIVER_PHONE+" text," +
                 Variable.STRING_TAKER_PHONE+" text," +
                 Variable.STRING_AMOUNT+" double,"+
@@ -208,5 +210,11 @@ public class TransactionTable implements ITable{
     @Override
     public String toDropTableString() {
         return "DROP TABLE "+" "+tableName();
+    }
+
+    // generate an encrypted transaction id
+    public String generateTransactionID(){
+        String inputText = giverPhone+""+takerPhone+amount+description+entryTime;
+        return AppSecurityManager.getEncryptedText(inputText);
     }
 }

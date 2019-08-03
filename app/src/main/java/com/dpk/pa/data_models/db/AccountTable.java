@@ -2,6 +2,10 @@ package com.dpk.pa.data_models.db;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by chandradasdipok on 3/23/2016.
  */
@@ -41,7 +45,6 @@ public class AccountTable implements ITable{
     public String toSelectString() {
         return "select * from "+ tableName();
     }
-
 
     @Override
     public ITable toITableFromCursor(Cursor cursor) {
@@ -135,5 +138,14 @@ public class AccountTable implements ITable{
     public static class Variable {
         public final static String STRING_NAME = "name";
         public final static String STRING_PHONE = "phone";
+    }
+
+    public List<AccountTable> toAccountTables(List<ITable> iTables){
+        List<AccountTable> accountTables = new ArrayList<AccountTable>();
+        for (ITable iTable: iTables) {
+            AccountTable accountTable = (AccountTable) iTable.toClone();
+            accountTables.add(accountTable);
+        }
+        return accountTables;
     }
 }
