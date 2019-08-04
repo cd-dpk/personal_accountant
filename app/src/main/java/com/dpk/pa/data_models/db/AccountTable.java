@@ -12,10 +12,20 @@ import java.util.List;
 
 public class AccountTable implements ITable{
 
+    public String getWhereClause() {
+        return whereClause;
+    }
+
+    public void setWhereClause(String whereClause) {
+        this.whereClause = whereClause;
+    }
+
+    private String whereClause ="";
     private String name;
     private String phone;
 
     public AccountTable() {}
+
 
     public AccountTable(String phone, String name) {
         this();
@@ -43,7 +53,7 @@ public class AccountTable implements ITable{
 
     @Override
     public String toSelectString() {
-        return "select * from "+ tableName();
+        return "select * from "+ tableName()+" where  "+ getWhereClause();
     }
 
     @Override
@@ -128,6 +138,8 @@ public class AccountTable implements ITable{
     public String toDropTableString() {
         return "drop table "+tableName()+" if exists";
     }
+
+
 
     @Override
     public String toString() {

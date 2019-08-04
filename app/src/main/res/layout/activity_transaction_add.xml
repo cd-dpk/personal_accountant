@@ -15,7 +15,7 @@
         android:layout_margin="10dp"
         android:weightSum="2">
         <TextView
-            android:id="@+id/text_view_spinner_giver_label"
+            android:id="@+id/text_view_transaction_add_spinner_giver_label"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="100dp"
@@ -37,7 +37,7 @@
         android:layout_margin="10dp"
         android:weightSum="2">
         <TextView
-            android:id="@+id/text_view_spinner_taker_label"
+            android:id="@+id/text_view_transaction_add_spinner_taker_label"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="100dp"
@@ -59,18 +59,19 @@
         android:layout_margin="10dp"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/text_view_description_label"
+            android:id="@+id/text_view_transaction_add_description_label"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="@string/description_label"/>
         <EditText
-            android:id="@+id/text_view_description"
+            android:id="@+id/edit_text_transaction_add_description"
             android:layout_gravity="center"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_weight="1.25"
+
             />
     </LinearLayout>
 
@@ -82,14 +83,14 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/text_view_amount_label"
+            android:id="@+id/text_view_transaction_add_amount_label"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/amount_label" />
         <EditText
-            android:id="@+id/text_view_amount"
+            android:id="@+id/edit_text_transaction_add_amount"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
@@ -97,7 +98,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_transaction_add"
+        android:id="@+id/button_transaction_add_add"
         android:layout_width="@dimen/button_width"
         android:layout_height="@dimen/button_height"
         android:text="@string/button_transaction_add"

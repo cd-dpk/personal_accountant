@@ -8,6 +8,9 @@ import com.dpk.pa.security.AppSecurityManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by chandradasdipok on 3/23/2016.
  */
@@ -21,7 +24,18 @@ public class TransactionTable implements ITable{
     private String description="";
     private String entryTime="";
 
+    private String whereClause="";
+
+    public String getWhereClause() {
+        return whereClause;
+    }
+
+    public void setWhereClause(String whereClause) {
+        this.whereClause = whereClause;
+    }
+
     public TransactionTable() {}
+
 
     public TransactionTable(String transactionId, String giverPhone, String takerPhone, double amount, String description, String entryTime) {
         setTransactionId(transactionId);
@@ -81,7 +95,11 @@ public class TransactionTable implements ITable{
 
     @Override
     public String toSelectString() {
-        return "select * from "+ tableName();
+        if (getWhereClause().equals("")){
+            return "select * from "+ tableName();
+        }else {
+            return "select * from "+ tableName()+" where "+ getWhereClause();
+        }
     }
 
     @Override
@@ -198,6 +216,16 @@ public class TransactionTable implements ITable{
                 description+","+
                 entryTime+")";
     }
+
+    public List<TransactionTable> toTransactionTables(List<ITable> iTables) {
+        List<TransactionTable> transactionTables = new ArrayList<TransactionTable>();
+        for (ITable iTable: iTables) {
+            TransactionTable transactionTable = (TransactionTable) iTable.toClone();
+            transactionTables.add(transactionTable);
+        }
+        return transactionTables;
+    }
+
     public static class Variable {
 
         public final static String STRING_TRANSACTION_ID = "t_id",
@@ -211,6 +239,8 @@ public class TransactionTable implements ITable{
     public String toDropTableString() {
         return "DROP TABLE "+" "+tableName();
     }
+
+
 
     // generate an encrypted transaction id
     public String generateTransactionID(){

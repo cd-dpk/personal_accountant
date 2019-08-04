@@ -50,7 +50,24 @@ public class PersonalAccountant {
         return new AccountTable().toAccountTables(iTables);
     }
     public boolean insertTransactionIntoDB(TransactionTable transactionTable){
-        return false;
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        return dataBaseHelper.insertRow(transactionTable);
     }
+    public List<TransactionTable> getTransactionsBetween(String phone1, String phone2){
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        TransactionTable transactionTable = new TransactionTable();
+        String whereClause = TransactionTable.Variable.STRING_GIVER_PHONE +" IN ('"+phone1+"','"+phone2+")";
+        whereClause += " or "+TransactionTable.Variable.STRING_TAKER_PHONE +" IN ('"+phone1+"','"+phone2+")";
+        transactionTable.setWhereClause(whereClause);
+        List<ITable> iTables = dataBaseHelper.selectRows(transactionTable);
+        return new TransactionTable().toTransactionTables(iTables);
+    }
+    public List<TransactionTable> getTransactions(){
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        TransactionTable transactionTable = new TransactionTable();
+        List<ITable> iTables = dataBaseHelper.selectRows(transactionTable);
+        return new TransactionTable().toTransactionTables(iTables);
+    }
+
 
 }

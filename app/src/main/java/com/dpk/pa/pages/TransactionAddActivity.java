@@ -1,6 +1,8 @@
 package com.dpk.pa.pages;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +18,7 @@ import com.dpk.pa.R;
 import com.dpk.pa.data_models.Interactive;
 import com.dpk.pa.data_models.db.AccountTable;
 import com.dpk.pa.data_models.db.TransactionTable;
+import com.dpk.pa.utils.TimeHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +41,7 @@ public class TransactionAddActivity extends AppCompatActivity {
             phones.add(accountTable.getPhone());
         }
         final Spinner giverSpinner, takerSpinner;
-        EditText descriptionText, amountText;
+        final EditText descriptionText, amountText;
         Button transactionAddButton;
         giverSpinner = (Spinner) findViewById(R.id.spinner_giver);
         ArrayAdapter<String> giverStringArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,phones);
@@ -48,9 +51,10 @@ public class TransactionAddActivity extends AppCompatActivity {
         takerSpinner.setAdapter(takerStringArrayAdapter);
 
 
-        descriptionText = (EditText) findViewById(R.id.text_view_description);
-        amountText = (EditText) findViewById(R.id.text_view_amount);
-        transactionAddButton = (Button) findViewById(R.id.button_transaction_add);
+        descriptionText = (EditText) findViewById(R.id.edit_text_transaction_add_description);
+        amountText = (EditText) findViewById(R.id.edit_text_transaction_add_amount);
+        transactionAddButton = (Button) findViewById(R.id.button_transaction_add_add);
+
 
         giverSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -64,33 +68,37 @@ public class TransactionAddActivity extends AppCompatActivity {
             }
         });
 
-
-
-        giverSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        takerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 takerPhone = phones.get(i);
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
 
-        amount = amountText.getText().toString();
-
-
         transactionAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                amount = amountText.getText().toString();
+                transactionDescription = descriptionText.getText().toString();
                 PersonalAccountant personalAccountant1 = new PersonalAccountant(TransactionAddActivity.this);
+
                 TransactionTable transactionTable = new TransactionTable();
                 transactionTable.setGiverPhone(giverPhone);
                 transactionTable.setTakerPhone(takerPhone);
-//                transactionTable.setAmount(Double.parseDouble(amount));
+                transactionTable.setAmount(Double.parseDouble(amount));
+                transactionTable.setDescription(transactionDescription);
+                transactionTable.setEntryTime(TimeHandler.now());
+
                 transactionTable.setTransactionId(transactionTable.generateTransactionID());
-                Toast.makeText(TransactionAddActivity.this, transactionTable.toString(),Toast.LENGTH_LONG).show();
+                Log.d("TRANSACTION", transactionTable.toString());
+                if (personalAccountant.insertTransactionIntoDB(transactionTable)) {
+                    Intent intent = new Intent(TransactionAddActivity.this, TransactionListActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
