@@ -23,6 +23,7 @@ public class AccountOpenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_open);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         phoneText = (EditText) findViewById(R.id.edit_text_phone_number_open);
         nameText = (EditText) findViewById(R.id.edit_text_name_open);
@@ -59,8 +60,4 @@ public class AccountOpenActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
 }

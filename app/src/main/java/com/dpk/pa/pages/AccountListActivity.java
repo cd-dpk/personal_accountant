@@ -38,7 +38,8 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
         accountRecyclerView.setHasFixedSize(true);
         // Data
         PersonalAccountant personalAccountant = new PersonalAccountant(this);
-        accountList = personalAccountant.getAllAccountsExceptOwner();
+        AccountTable exclusiveAccount = personalAccountant.getLoggedAccount();
+        accountList = personalAccountant.getAllAccountsExcept(exclusiveAccount);
         // Data
         RecyclerViewListAdapter accountRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this,R.layout.card_account,accountList.size());
@@ -56,7 +57,7 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
 
 
     @Override
-    public void listenItem(View view, int position) {
+    public void listenItem(View view, final int position) {
         TextView phoneText, nameText, givenToText, TakenFromText;
         ImageButton rightArrowButton;
         phoneText = (TextView) view.findViewById(R.id.text_view_card_account_phone);
@@ -68,11 +69,11 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
         phoneText.setText(accountList.get(position).getPhone());
         nameText.setText(accountList.get(position).getName());
 
-
         rightArrowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AccountListActivity.this, TransactionListActivity.class);
+                ApplicationConstants.TARGET_USER_PHONE = accountList.get(position).getPhone();
                 intent.putExtra(ApplicationConstants.LOGGED_USER_PHONE_LABEL, ApplicationConstants.LOGGED_PHONE_NUMBER);
                 intent.putExtra(ApplicationConstants.TARGET_USER_PHONE_LABEL, ApplicationConstants.TARGET_USER_PHONE);
                 startActivity(intent);

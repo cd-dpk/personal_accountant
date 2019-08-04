@@ -22,5 +22,6 @@
     <string name="amount_label">Amount</string>
     <string name="author">DPK-Solutions</string>
     <string name="pull_to_refresh">Pull to Refresh!</string>
+    <string name="person">Person</string>
 
 </resources>

@@ -20,36 +20,14 @@
             android:layout_margin="10dp"
             android:weightSum="2">
             <TextView
-                android:id="@+id/text_view_transaction_list_spinner_giver_label"
+                android:id="@+id/text_view_transaction_list_spinner_label"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:text="@string/giver_label"/>
+                android:text="@string/person"/>
             <Spinner
-                android:id="@+id/transaction_list_spinner_giver"
-                android:layout_gravity="center"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_weight="1.25"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp"
-            android:weightSum="2">
-            <TextView
-                android:id="@+id/text_view_transaction_list_spinner_taker_label"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:text="@string/taker_label"/>
-            <Spinner
-                android:id="@+id/transaction_list_spinner_taker"
+                android:id="@+id/transaction_list_spinner_person"
                 android:layout_gravity="center"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
@@ -71,8 +49,6 @@
 
         </ScrollView>
     </LinearLayout>
-
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/transaction_list_ft_add_transaction"
         android:layout_width="wrap_content"
