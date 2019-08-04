@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center"
         android:layout_margin="@dimen/page_margin"
@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/text_view_welcome_message"
             android:text="@string/account_open_msg"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1"
             />
         <LinearLayout
@@ -29,54 +30,40 @@
             android:layout_gravity="center"
             android:weightSum="3"
             android:orientation="vertical">
-            <LinearLayout
-                android:id="@+id/phone_number_group"
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:weightSum="2"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/account_open_phone_display"
-                    android:layout_weight="0.75"
-                    />
-                <EditText
+                    android:textColorHighlight="@color/colorPrimary"
                     android:id="@+id/edit_text_phone_number_open"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:hint="Phone Number"
-                    android:layout_weight="0.75"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/name_group"
+                    android:hint="@string/account_open_phone_display"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="2"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/account_open_name_display"
-                    android:layout_weight="0.75"/>
-                <EditText
                     android:id="@+id/edit_text_name_open"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.75"
-                    android:singleLine="true"
-                    android:hint="Name"/>
-            </LinearLayout>
+                    android:hint="@string/account_open_phone_display"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <Button
-                android:layout_gravity="center"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="@dimen/button_height"
                 android:id="@+id/button_open"
+                android:drawableLeft="@drawable/plus_green"
+                android:layout_marginTop="10dp"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="OPEN"/>
+                android:text="OPEN" />
         </LinearLayout>
 
     </LinearLayout>

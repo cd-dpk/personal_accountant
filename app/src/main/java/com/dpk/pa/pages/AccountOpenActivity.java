@@ -50,7 +50,7 @@ public class AccountOpenActivity extends AppCompatActivity {
                     AccountTable accountTable = new AccountTable(phone, name);
                     PersonalAccountant personalAccountant = new PersonalAccountant(AccountOpenActivity.this);
                     if (personalAccountant.insertAccountIntoDB(accountTable)){
-                        Log.d("PA", ApplicationConstants.PHONE_NUMBER);
+                        Log.d("PA", ApplicationConstants.LOGGED_PHONE_NUMBER);
                         Intent intent = new Intent(AccountOpenActivity.this, AccountListActivity.class);
                         startActivity(intent);
                     }

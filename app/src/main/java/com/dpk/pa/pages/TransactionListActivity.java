@@ -1,5 +1,6 @@
 package com.dpk.pa.pages;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.dpk.pa.PersonalAccountant;
@@ -20,7 +21,6 @@ import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class TransactionListActivity extends AppCompatActivity implements OnRecyclerViewItemListener {
     RecyclerView transactionRecyclerView;
@@ -43,12 +43,12 @@ public class TransactionListActivity extends AppCompatActivity implements OnRecy
         RecyclerViewListAdapter accountRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this,R.layout.card_account,accountList.size());
         transactionRecyclerView.setAdapter(accountRecyclerViewListAdapter);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.transaction_list_ft_add_transaction);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(TransactionListActivity.this, TransactionAddActivity.class);
+                startActivity(intent);
             }
         });
     }

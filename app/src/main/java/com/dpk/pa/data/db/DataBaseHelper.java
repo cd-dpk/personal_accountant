@@ -61,6 +61,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public List<ITable> selectRows(ITable iTableType) {
         List<ITable> iTableList = new ArrayList<ITable>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Log.d(DataBaseHelper.LOG, iTableType.toSelectString());
         Cursor cursor = sqLiteDatabase.rawQuery(iTableType.toSelectString(), null);
         if (cursor != null && cursor.moveToFirst()) {
             do {

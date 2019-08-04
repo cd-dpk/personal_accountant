@@ -14,8 +14,6 @@ import com.dpk.pa.PersonalAccountant;
 import com.dpk.pa.R;
 import com.dpk.pa.data.constants.ApplicationConstants;
 import com.dpk.pa.data.constants.RegistrationConstants;
-import com.dpk.pa.data.db.DataBaseHelper;
-import com.dpk.pa.data_models.Account;
 import com.dpk.pa.data_models.db.AccountTable;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -31,8 +29,11 @@ public class WelcomeActivity extends AppCompatActivity {
 
 //        DANGER STATEMENT
 //        this.deleteDatabase(DataBaseHelper.DATABASE_NAME);
+//        PersonalAccountant personalAccountant = new PersonalAccountant(this);
+//        personalAccountant.savePersonalAccountPhone("01743972128");
 
         if (isRegistered()){
+            Log.d(RegistrationConstants.USER_PHONE, ApplicationConstants.LOGGED_PHONE_NUMBER);
             Intent intent = new Intent(WelcomeActivity.this, AccountListActivity.class);
             startActivity(intent);
         }
@@ -64,9 +65,9 @@ public class WelcomeActivity extends AppCompatActivity {
                     PersonalAccountant personalAccountant = new PersonalAccountant(WelcomeActivity.this);
                     if (personalAccountant.insertAccountIntoDB(accountTable)){
                         personalAccountant.savePersonalAccountPhone(accountTable.getPhone());
-                        ApplicationConstants.PHONE_NUMBER = personalAccountant.loadPersonalAccountPhone();
+                        ApplicationConstants.LOGGED_PHONE_NUMBER = personalAccountant.loadPersonalAccountPhone();
 
-                        Log.d("PA", ApplicationConstants.PHONE_NUMBER);
+                        Log.d("PA", ApplicationConstants.LOGGED_PHONE_NUMBER);
                     }
                 }
             }
@@ -74,10 +75,10 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private boolean isRegistered(){
-        ApplicationConstants.PHONE_NUMBER = new PersonalAccountant(WelcomeActivity.this)
+        ApplicationConstants.LOGGED_PHONE_NUMBER = new PersonalAccountant(WelcomeActivity.this)
                 .loadPersonalAccountPhone();
-        Log.d(RegistrationConstants.USER_PHONE, ApplicationConstants.PHONE_NUMBER);
-        if (!ApplicationConstants.PHONE_NUMBER.equals("")){
+        Log.d(RegistrationConstants.USER_PHONE, ApplicationConstants.LOGGED_PHONE_NUMBER);
+        if (!ApplicationConstants.LOGGED_PHONE_NUMBER.equals("")){
             return true;
         }
         return false;
