@@ -33,7 +33,7 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        accountRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_account_list);
+    /*    accountRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_account_list);
         accountRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         accountRecyclerView.setHasFixedSize(true);
         // Data
@@ -43,8 +43,9 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
         RecyclerViewListAdapter accountRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this,R.layout.card_account,accountList.size());
         accountRecyclerView.setAdapter(accountRecyclerViewListAdapter);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
+*/
+/*
+        FloatingActionButton fab = findViewById(R.id.ft_account_list_add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +53,7 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
                 startActivity(intent);
             }
         });
+*/
     }
 
 

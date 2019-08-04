@@ -53,7 +53,11 @@ public class AccountTable implements ITable{
 
     @Override
     public String toSelectString() {
-        return "select * from "+ tableName()+" where  "+ getWhereClause();
+        if (getWhereClause().equals("")){
+            return "select * from "+ tableName();
+        }else {
+            return "select * from "+ tableName()+" where "+ getWhereClause();
+        }
     }
 
     @Override

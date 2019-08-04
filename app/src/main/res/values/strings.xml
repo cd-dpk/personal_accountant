@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PA</string>
+    <string name="app_name">Personal Accountant</string>
     <string name="welcome_msg">Hi! I am your Personal Accountant!\n You can call me PA!</string>
     <string name="account_open_msg">Open New Account!</string>
     <string name="account_open_phone_display">Type Account Person Phone</string>
@@ -20,5 +20,7 @@
     <string name="account_attr_phone">Phone</string>
     <string name="account_attr_name">Name</string>
     <string name="amount_label">Amount</string>
+    <string name="author">DPK-Solutions</string>
+    <string name="pull_to_refresh">Pull to Refresh!</string>
 
 </resources>
