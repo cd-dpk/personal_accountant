@@ -1,14 +1,25 @@
 package com.dpk.pa.data_models;
 
+import com.dpk.pa.data_models.db.AccountTable;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Account{
     private String phone, name;
-    private double deposit, due;
+    private double givenTo=0.0, TakenFrom=0.0;
 
-    public Account(String phone, String name, double deposit, double due){
+    public Account(String phone, String name, double givenTo, double takenFrom){
         setName(name);
         setPhone(phone);
-        setDeposit(deposit);
-        setDue(due);
+        setGivenTo(givenTo);
+        setTakenFrom(takenFrom);
+    }
+    public Account(AccountTable accountTable){
+        setName(accountTable.getName());
+        setPhone(accountTable.getPhone());
+        setGivenTo(0.0);
+        setTakenFrom(0.0);
     }
 
     public String getPhone() {
@@ -27,19 +38,20 @@ public class Account{
         this.name = name;
     }
 
-    public double getDeposit() {
-        return deposit;
+    public double getGivenTo() {
+        return givenTo;
     }
 
-    public void setDeposit(double deposit) {
-        this.deposit = deposit;
+    public void setGivenTo(double givenTo) {
+        this.givenTo = givenTo;
     }
 
-    public double getDue() {
-        return due;
+    public double getTakenFrom() {
+        return TakenFrom;
     }
 
-    public void setDue(double due) {
-        this.due = due;
+    public void setTakenFrom(double takenFrom) {
+        TakenFrom = takenFrom;
     }
+
 }

@@ -23,5 +23,6 @@
     <string name="author">DPK-Solutions</string>
     <string name="pull_to_refresh">Pull to Refresh!</string>
     <string name="person">Person</string>
+    <string name="account_open_amount_display">Enter Amount</string>
 
 </resources>

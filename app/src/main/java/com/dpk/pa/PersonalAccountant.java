@@ -7,9 +7,11 @@ import android.util.Log;
 import com.dpk.pa.data.constants.ApplicationConstants;
 import com.dpk.pa.data.constants.RegistrationConstants;
 import com.dpk.pa.data.db.DataBaseHelper;
+import com.dpk.pa.data_models.Account;
 import com.dpk.pa.data_models.db.AccountTable;
 import com.dpk.pa.data_models.db.ITable;
 import com.dpk.pa.data_models.db.TransactionTable;
+import com.dpk.pa.data_models.db.Tuple;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,5 +95,45 @@ public class PersonalAccountant {
             phoneNumbers.add(accountTable.getPhone());
         }
         return  phoneNumbers;
+    }
+    public double getTotalAmountGivenTo(AccountTable targetAccount, AccountTable ownerAccount){
+        List<Tuple> tuples = new ArrayList<Tuple>();
+        Tuple tuple = new Tuple("select sum("+ TransactionTable.Variable.STRING_AMOUNT+") as given_to from "+new TransactionTable().tableName());
+        tuple.setWhereClause(TransactionTable.Variable.STRING_GIVER_PHONE+"='"+ownerAccount.getPhone()+
+                "' and "+TransactionTable.Variable.STRING_TAKER_PHONE+"='"+targetAccount.getPhone()+"'");
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<ITable> iTables = dataBaseHelper.selectRows(tuple);
+        Tuple qTuple = new Tuple();
+        if (iTables.size()==1){
+            Log.d("VAL", iTables.get(0).toString());
+            qTuple = (Tuple) iTables.get(0).toClone();
+            double amount = Double.parseDouble(qTuple.values.get("given_to"));
+                return amount;
+            }
+        return -1;
+    }
+
+    public double getTotalAmountTaken(AccountTable targetAccount, AccountTable ownerAccount){
+        List<Tuple> tuples = new ArrayList<Tuple>();
+        Tuple tuple = new Tuple("select  sum("+ TransactionTable.Variable.STRING_AMOUNT+") as taken_from from "+new TransactionTable().tableName());
+        tuple.setWhereClause(TransactionTable.Variable.STRING_GIVER_PHONE+"='"+targetAccount.getPhone()+
+                "' and "+TransactionTable.Variable.STRING_TAKER_PHONE+"='"+ownerAccount.getPhone()+"'");
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<ITable> iTables = dataBaseHelper.selectRows(tuple);
+        Tuple qTuple = new Tuple();
+        if (iTables.size()==1){
+            qTuple = (Tuple) iTables.get(0).toClone();
+            double amount = Double.parseDouble(qTuple.values.get("taken_from"));
+            return amount;
+        }
+        return -1;
+    }
+
+    public List<Account> fromTableToObject(List<AccountTable> accountTables){
+        List<Account> accounts = new ArrayList<Account>();
+        for (AccountTable accountTable: accountTables){
+            accounts.add(new Account(accountTable));
+        }
+        return accounts;
     }
 }

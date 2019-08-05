@@ -3,6 +3,8 @@ package com.dpk.pa.data_models.db;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import com.dpk.pa.data_models.Account;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,12 @@ import java.util.List;
  */
 
 public class AccountTable implements ITable{
+
+
+    public AccountTable(Account account){
+        setPhone(account.getPhone());
+        setName(account.getName());
+    }
 
     public String getWhereClause() {
         return whereClause;
@@ -164,4 +172,5 @@ public class AccountTable implements ITable{
         }
         return accountTables;
     }
+
 }
