@@ -3,6 +3,7 @@ package com.dpk.pa.pages;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,16 +22,11 @@ public class WelcomeActivity extends AppCompatActivity {
     EditText phoneText, nameText;
     Button okayButton;
     String phone="", name="";
-
+    View progressView ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
-//        DANGER STATEMENT
-//        this.deleteDatabase(DataBaseHelper.DATABASE_NAME);
-//        PersonalAccountant personalAccountant = new PersonalAccountant(this);
-//        personalAccountant.savePersonalAccountPhone("01743972128");
 
         if (isRegistered()){
             Log.d(RegistrationConstants.USER_PHONE, ApplicationConstants.LOGGED_PHONE_NUMBER);
@@ -41,6 +37,7 @@ public class WelcomeActivity extends AppCompatActivity {
         phoneText = (EditText) findViewById(R.id.edit_text_phone_number);
         nameText = (EditText) findViewById(R.id.edit_text_name);
         okayButton = findViewById(R.id.button_okay);
+        progressView = (View) findViewById(R.id.progress_view);
 
         okayButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,13 +59,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 else {
                     Toast.makeText(WelcomeActivity.this, "Correct!",Toast.LENGTH_LONG).show();
                     AccountTable accountTable = new AccountTable(phone, name);
-                    PersonalAccountant personalAccountant = new PersonalAccountant(WelcomeActivity.this);
-                    if (personalAccountant.insertAccountIntoDB(accountTable)){
-                        personalAccountant.savePersonalAccountPhone(accountTable.getPhone());
-                        ApplicationConstants.LOGGED_PHONE_NUMBER = personalAccountant.loadPersonalAccountPhone();
-
-                        Log.d("PA", ApplicationConstants.LOGGED_PHONE_NUMBER);
-                    }
+                    new SwitchingActivityAsyncTask(accountTable).execute();
                 }
             }
         });
@@ -82,6 +73,41 @@ public class WelcomeActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    private class SwitchingActivityAsyncTask extends AsyncTask<String, String ,String>{
+        AccountTable accountTable;
+        SwitchingActivityAsyncTask(AccountTable accountTable){
+            super();
+            this.accountTable = accountTable;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressView.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            PersonalAccountant personalAccountant = new PersonalAccountant(WelcomeActivity.this);
+            if (personalAccountant.insertAccountIntoDB(accountTable)){
+                personalAccountant.savePersonalAccountPhone(accountTable.getPhone());
+                ApplicationConstants.LOGGED_PHONE_NUMBER = personalAccountant.loadPersonalAccountPhone();
+                Log.d("PA", ApplicationConstants.LOGGED_PHONE_NUMBER);
+                return Boolean.TRUE.toString();
+            }
+            return Boolean.FALSE.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            progressView.setVisibility(View.GONE);
+            if (s.equals(Boolean.TRUE.toString())){
+                Intent intent = new Intent(WelcomeActivity.this, AccountListActivity.class);
+                startActivity(intent);
+            }
+        }
     }
 
 }

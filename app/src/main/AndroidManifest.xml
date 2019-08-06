@@ -22,12 +22,12 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity android:name=".pages.AccountOpenActivity" >
+        </activity>
+        <activity android:name=".pages.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".pages.WelcomeActivity">
         </activity>
         <activity android:name=".MainActivity" />
     </application>

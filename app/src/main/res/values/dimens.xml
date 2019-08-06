@@ -17,6 +17,7 @@
     <dimen name="card_account_due">100dp</dimen>
     <dimen name="card_account_elevation">5dp</dimen>
     <dimen name="card_account_corner_radius">4dp</dimen>
+    <dimen name="layout_padding_8dp">8dp</dimen>
     <!-- AccountTable Card -->
 
 </resources>
