@@ -24,5 +24,11 @@
     <string name="pull_to_refresh">Pull to Refresh!</string>
     <string name="person">Person</string>
     <string name="account_open_amount_display">Enter Amount</string>
+    <string name="transaction_type_passive_taken_amount">Taken Amount</string>
+    <string name="transaction_type_passive_given_amount">Given Amount</string>
+    <string name="transaction_date">Transaction Date</string>
+    <string name="transaction_description">Description</string>
+    <string name="account_open_description_display">Type Descrition of Transaction</string>
+    <string name="account_net_amount">Net Amount</string>
 
 </resources>

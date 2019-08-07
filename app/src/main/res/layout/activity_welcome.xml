@@ -14,7 +14,7 @@
         android:weightSum="3"
         android:orientation="vertical">
         <include
-            android:id="@+id/progress_view"
+            android:id="@+id/welcome_progress_view"
             layout="@layout/view_progress_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

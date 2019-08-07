@@ -5,100 +5,101 @@
         android:id="@+id/card_account_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/card_account_height"
-        card_view:cardCornerRadius="@dimen/card_account_corner_radius"
-        android:layout_margin="@dimen/card_account_margin">
-
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="@dimen/card_account_corner_radius">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="4">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <include
+            layout="@layout/horizontal_line"
+            />
         <LinearLayout
-            android:id="@+id/date"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:weightSum="2">
-            <TextView
-                android:id="@+id/text_view_card_transaction_date_label"
-                android:layout_width="@dimen/card_account_phone"
-                android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="4">
+            <LinearLayout
+                android:id="@+id/date"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/text_view_card_transaction_date"
-                android:layout_width="@dimen/card_account_name"
                 android:layout_weight="1"
+                android:weightSum="2">
+                <TextView
+                    android:id="@+id/text_view_card_transaction_date"
+                    android:layout_width="@dimen/card_account_phone"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/transaction_date"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/Give"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                android:weightSum="2"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/text_view_card_transaction_giver_label"
+                    android:layout_width="@dimen/card_account_deposit_label"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/transaction_type_passive_given"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/text_view_card_transaction_given_amount"
+                    android:layout_width="@dimen/card_account_deposit"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/transaction_type_passive_given_amount"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/Taker"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                android:weightSum="2"
+                android:layout_gravity="center"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/text_view_card_transaction_taker_label"
+                    android:layout_width="@dimen/card_account_due_label"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/transaction_type_passive_taken"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/text_view_card_transaction_taken_amount"
+                    android:layout_width="@dimen/card_account_due"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/transaction_type_passive_taken_amount"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                android:weightSum="2"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_height="wrap_content" />
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1.0"
+                    android:text="@string/transaction_description"
+                    android:id="@+id/text_view_card_transaction_description"/>
+            </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/Give"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:orientation="vertical"
-            android:weightSum="2"
-            android:layout_weight="1">
-            <TextView
-                android:id="@+id/text_view_card_transaction_giver_label"
-                android:layout_width="@dimen/card_account_deposit_label"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/deposit_label"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/text_view_card_transaction_giver"
-                android:layout_width="@dimen/card_account_deposit"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/deposit_label"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/Taker"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:orientation="vertical"
-            android:weightSum="2"
-            android:layout_gravity="center"
-            android:layout_weight="1">
-            <TextView
-                android:id="@+id/text_view_card_transaction_taker_label"
-                android:layout_width="@dimen/card_account_due_label"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/due_label"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/text_view_card_transaction_taker"
-                android:layout_width="@dimen/card_account_due"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:text="@string/due_label"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:orientation="vertical"
-            android:weightSum="2"
-            android:layout_gravity="center"
-            android:layout_weight="1">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1.0"
-                android:text="@string/transaction_attr_amount"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1.0"
-                android:id="@+id/text_view_card_transaction_amount"/>
-        </LinearLayout>
+        <include
+            layout="@layout/horizontal_line"
+            />
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

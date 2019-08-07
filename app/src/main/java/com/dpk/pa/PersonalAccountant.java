@@ -64,15 +64,29 @@ public class PersonalAccountant {
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         return dataBaseHelper.insertRow(transactionTable);
     }
-    public List<TransactionTable> getTransactionsBetween(AccountTable accountTable1, AccountTable accountTable2){
+    public List<TransactionTable> getTransactionsBetween(AccountTable accountTable1, AccountTable accountTable2, boolean isAscending){
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         TransactionTable transactionTable = new TransactionTable();
         String whereClause = TransactionTable.Variable.STRING_GIVER_PHONE +" IN ('"+accountTable1.getPhone()+"','"+accountTable2.getPhone()+"')";
-        whereClause += " or "+TransactionTable.Variable.STRING_TAKER_PHONE +" IN ('"+accountTable1.getPhone()+"','"+accountTable2.getPhone()+"')";
+        whereClause += " and "+TransactionTable.Variable.STRING_TAKER_PHONE +" IN ('"+accountTable1.getPhone()+"','"+accountTable2.getPhone()+"')";
+        if (isAscending){
+            whereClause += "order by "+ TransactionTable.Variable.STRING_ENTRY_TIME+" asc";
+        }
+        else {
+            whereClause += "order by "+ TransactionTable.Variable.STRING_ENTRY_TIME+" desc";
+        }
         transactionTable.setWhereClause(whereClause);
         List<ITable> iTables = dataBaseHelper.selectRows(transactionTable);
         return new TransactionTable().toTransactionTables(iTables);
     }
+    public boolean isTransactionGivenTo( TransactionTable transactionTable,AccountTable loggedAccount){
+        boolean bool = false;
+        if (transactionTable.getTakerPhone().equals(loggedAccount.getPhone())){
+            bool = true;
+        }
+        return bool;
+    }
+
     public List<TransactionTable> getTransactions(){
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         TransactionTable transactionTable = new TransactionTable();
@@ -107,13 +121,16 @@ public class PersonalAccountant {
         if (iTables.size()==1){
             Log.d("VAL", iTables.get(0).toString());
             qTuple = (Tuple) iTables.get(0).toClone();
-            double amount = Double.parseDouble(qTuple.values.get("given_to"));
-                return amount;
+            double amount = 0.0;
+            if (!qTuple.values.get("given_to").equals("")){
+                amount = Double.parseDouble(qTuple.values.get("given_to"));
             }
+            return amount;
+        }
         return -1;
     }
 
-    public double getTotalAmountTaken(AccountTable targetAccount, AccountTable ownerAccount){
+    public double getTotalAmountTakenFrom(AccountTable targetAccount, AccountTable ownerAccount){
         List<Tuple> tuples = new ArrayList<Tuple>();
         Tuple tuple = new Tuple("select  sum("+ TransactionTable.Variable.STRING_AMOUNT+") as taken_from from "+new TransactionTable().tableName());
         tuple.setWhereClause(TransactionTable.Variable.STRING_GIVER_PHONE+"='"+targetAccount.getPhone()+
@@ -123,10 +140,13 @@ public class PersonalAccountant {
         Tuple qTuple = new Tuple();
         if (iTables.size()==1){
             qTuple = (Tuple) iTables.get(0).toClone();
-            double amount = Double.parseDouble(qTuple.values.get("taken_from"));
+            double amount = 0.0;
+            if (!qTuple.values.get("taken_from").equals("")){
+                amount = Double.parseDouble(qTuple.values.get("taken_from"));
+            }
             return amount;
         }
-        return -1;
+        return 0.0;
     }
 
     public List<Account> fromTableToObject(List<AccountTable> accountTables){
@@ -135,5 +155,14 @@ public class PersonalAccountant {
             accounts.add(new Account(accountTable));
         }
         return accounts;
+    }
+
+    public boolean isRegistered(){
+        ApplicationConstants.LOGGED_PHONE_NUMBER = loadPersonalAccountPhone();
+        Log.d(RegistrationConstants.USER_PHONE, ApplicationConstants.LOGGED_PHONE_NUMBER);
+        if (!ApplicationConstants.LOGGED_PHONE_NUMBER.equals("")){
+            return true;
+        }
+        return false;
     }
 }

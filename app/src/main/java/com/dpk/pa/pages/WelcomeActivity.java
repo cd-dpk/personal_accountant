@@ -15,29 +15,27 @@ import com.dpk.pa.PersonalAccountant;
 import com.dpk.pa.R;
 import com.dpk.pa.data.constants.ApplicationConstants;
 import com.dpk.pa.data.constants.RegistrationConstants;
+import com.dpk.pa.data_models.IRegistration;
 import com.dpk.pa.data_models.db.AccountTable;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity implements IRegistration {
 
     EditText phoneText, nameText;
     Button okayButton;
     String phone="", name="";
     View progressView ;
+    PersonalAccountant personalAccountant;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
-        if (isRegistered()){
-            Log.d(RegistrationConstants.USER_PHONE, ApplicationConstants.LOGGED_PHONE_NUMBER);
-            Intent intent = new Intent(WelcomeActivity.this, AccountListActivity.class);
-            startActivity(intent);
-        }
+        personalAccountant = new PersonalAccountant(this);
+        checkRegistration(personalAccountant);
 
         phoneText = (EditText) findViewById(R.id.edit_text_phone_number);
         nameText = (EditText) findViewById(R.id.edit_text_name);
         okayButton = findViewById(R.id.button_okay);
-        progressView = (View) findViewById(R.id.progress_view);
+        progressView = (View) findViewById(R.id.welcome_progress_view);
 
         okayButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,15 +63,15 @@ public class WelcomeActivity extends AppCompatActivity {
         });
     }
 
-    private boolean isRegistered(){
-        ApplicationConstants.LOGGED_PHONE_NUMBER = new PersonalAccountant(WelcomeActivity.this)
-                .loadPersonalAccountPhone();
-        Log.d(RegistrationConstants.USER_PHONE, ApplicationConstants.LOGGED_PHONE_NUMBER);
-        if (!ApplicationConstants.LOGGED_PHONE_NUMBER.equals("")){
-            return true;
+    @Override
+    public void checkRegistration(PersonalAccountant personalAccountant) {
+        if (personalAccountant.isRegistered()) {
+            Log.d(RegistrationConstants.USER_PHONE, ApplicationConstants.LOGGED_PHONE_NUMBER);
+            Intent intent = new Intent(WelcomeActivity.this, AccountListActivity.class);
+            startActivity(intent);
         }
-        return false;
     }
+
 
     private class SwitchingActivityAsyncTask extends AsyncTask<String, String ,String>{
         AccountTable accountTable;

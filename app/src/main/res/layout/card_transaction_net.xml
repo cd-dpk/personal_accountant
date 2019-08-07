@@ -20,30 +20,6 @@
         android:orientation="horizontal"
         android:weightSum="3">
         <LinearLayout
-            android:id="@+id/phone_name"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:weightSum="2">
-
-            <TextView
-                android:id="@+id/text_view_card_account_phone"
-                android:layout_width="@dimen/card_account_phone"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/account_attr_phone" />
-
-            <TextView
-                android:id="@+id/text_view_card_account_name"
-                android:layout_width="@dimen/card_account_name"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/account_attr_name" />
-        </LinearLayout>
-        <LinearLayout
             android:id="@+id/give_value"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -52,7 +28,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/text_view_card_account_given_to_label"
+                android:id="@+id/text_view_card_transaction_net_given_to_label"
                 android:layout_width="@dimen/card_account_deposit_label"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -60,7 +36,7 @@
                 android:text="@string/transaction_type_passive_given" />
 
             <TextView
-                android:id="@+id/text_view_card_account_given_to"
+                android:id="@+id/text_view_card_transaction_net_given_to"
                 android:layout_width="@dimen/card_account_deposit"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -77,7 +53,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/text_view_card_account_taken_from_label"
+                android:id="@+id/text_view_card_transaction_net_taken_from_label"
                 android:layout_width="@dimen/card_account_due_label"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -85,7 +61,7 @@
                 android:text="@string/transaction_type_passive_taken" />
 
             <TextView
-                android:id="@+id/text_view_card_account_taken_from"
+                android:id="@+id/text_view_card_transaction_net_taken_from"
                 android:layout_width="@dimen/card_account_due"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -109,17 +85,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:id="@+id/text_view_card_account_account_amount_net"
+                android:id="@+id/text_view_card_transaction_net_account_amount_net"
                 android:text="@string/account_net_amount"/>
         </LinearLayout>
-        <ImageButton
-            android:id="@+id/button_card_account_right_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/right_arrow"
-            android:layout_gravity="center"
-            android:background="@android:color/transparent"
-            />
     </LinearLayout>
         <include
             layout="@layout/horizontal_line"

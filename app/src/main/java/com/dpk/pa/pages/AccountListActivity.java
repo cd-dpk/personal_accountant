@@ -2,6 +2,7 @@ package com.dpk.pa.pages;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -15,27 +16,30 @@ import com.dpk.pa.PersonalAccountant;
 import com.dpk.pa.R;
 import com.dpk.pa.adapter.RecyclerViewListAdapter;
 import com.dpk.pa.data.constants.ApplicationConstants;
+import com.dpk.pa.data.constants.RegistrationConstants;
 import com.dpk.pa.data_models.Account;
+import com.dpk.pa.data_models.IRegistration;
 import com.dpk.pa.data_models.OnRecyclerViewItemListener;
 import com.dpk.pa.data_models.db.AccountTable;
-import com.dpk.pa.data_models.db.Tuple;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountListActivity extends AppCompatActivity implements OnRecyclerViewItemListener {
+import static com.dpk.pa.R.*;
+
+public class AccountListActivity extends AppCompatActivity implements OnRecyclerViewItemListener, IRegistration {
 
     RecyclerView accountRecyclerView;
     List<Account> accounts = new ArrayList<Account>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_list);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        setContentView(layout.activity_account_list);
+        Toolbar toolbar = findViewById(id.toolbar);
         setSupportActionBar(toolbar);
 
-        accountRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_account_list);
+        accountRecyclerView = (RecyclerView) findViewById(id.recycler_view_account_list);
         accountRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         accountRecyclerView.setHasFixedSize(true);
         // Data
@@ -44,14 +48,14 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
         accounts = personalAccountant.fromTableToObject(personalAccountant.getAllAccountsExcept(exclusiveAccount));
         for (Account account: accounts){
             account.setGivenTo(personalAccountant.getTotalAmountGivenTo(new AccountTable(account),exclusiveAccount));
-            account.setTakenFrom(personalAccountant.getTotalAmountGivenTo(new AccountTable(account),exclusiveAccount));
+            account.setTakenFrom(personalAccountant.getTotalAmountTakenFrom(new AccountTable(account),exclusiveAccount));
         }
         // Data
         RecyclerViewListAdapter accountRecyclerViewListAdapter = new RecyclerViewListAdapter(
-                this,R.layout.card_account,accounts.size());
+                this, layout.card_account,accounts.size());
         accountRecyclerView.setAdapter(accountRecyclerViewListAdapter);
 
-        FloatingActionButton fab = findViewById(R.id.ft_account_list_add);
+        FloatingActionButton fab = findViewById(id.ft_account_list_add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,18 +68,27 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
 
     @Override
     public void listenItem(View view, final int position) {
-        TextView phoneText, nameText, givenToText, takenFromText;
+        Account account = accounts.get(position);
+        TextView phoneText, nameText, givenToText, takenFromText, amountNetText;
         ImageButton rightArrowButton;
-        phoneText = (TextView) view.findViewById(R.id.text_view_card_account_phone);
-        nameText = (TextView) view.findViewById(R.id.text_view_card_account_name);
-        givenToText = (TextView) view.findViewById(R.id.text_view_card_account_given_to);
-        takenFromText = (TextView) view.findViewById(R.id.text_view_card_account_taken_from);
-        rightArrowButton = (ImageButton) view.findViewById(R.id.card_account_button_right_arrow);
+        phoneText = (TextView) view.findViewById(id.text_view_card_account_phone);
+        nameText = (TextView) view.findViewById(id.text_view_card_account_name);
+        givenToText = (TextView) view.findViewById(id.text_view_card_account_given_to);
+        takenFromText = (TextView) view.findViewById(id.text_view_card_account_taken_from);
+        rightArrowButton = (ImageButton) view.findViewById(id.button_card_account_right_arrow);
+        amountNetText = (TextView) view.findViewById(id.text_view_card_account_account_amount_net);
 
-        phoneText.setText(accounts.get(position).getPhone());
-        nameText.setText(accounts.get(position).getName());
-        givenToText.setText(accounts.get(position).getGivenTo()+"");
-        takenFromText.setText(accounts.get(position).getTakenFrom()+"");
+        phoneText.setText(account.getPhone());
+        nameText.setText(account.getName());
+        givenToText.setText(account.getGivenTo()+"");
+        takenFromText.setText(account.getTakenFrom()+"");
+        double diff = account.getGivenTo()-account.getTakenFrom();
+        amountNetText.setText(diff+"");
+        amountNetText.setTextColor(getResources().getColor(color.red));
+        if (diff>=0){
+            amountNetText.setText("+"+diff);
+            amountNetText.setTextColor(getResources().getColor(color.green));
+        }
         rightArrowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,5 +99,14 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void checkRegistration(PersonalAccountant personalAccountant) {
+        if (!personalAccountant.isRegistered()) {
+            Log.d(RegistrationConstants.USER_PHONE, ApplicationConstants.LOGGED_PHONE_NUMBER);
+            Intent intent = new Intent(AccountListActivity.this, WelcomeActivity.class);
+            startActivity(intent);
+        }
     }
 }

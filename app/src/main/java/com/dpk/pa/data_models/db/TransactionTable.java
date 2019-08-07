@@ -2,6 +2,7 @@ package com.dpk.pa.data_models.db;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.dpk.pa.security.AppSecurityManager;
 
@@ -43,6 +44,7 @@ public class TransactionTable implements ITable{
         setTakerPhone(takerPhone);
         setAmount(amount);
         setDescription(description);
+        setEntryTime(entryTime);
     }
 
     public String getTransactionId() {
@@ -178,12 +180,13 @@ public class TransactionTable implements ITable{
     }
     @Override
     public ITable toClone(){
-        return  new TransactionTable();
+        return  new TransactionTable(transactionId, giverPhone,takerPhone,amount,description,entryTime);
     }
 
     @Override
     public ContentValues getInsertContentValues() {
         ContentValues contentValues= new ContentValues();
+        contentValues.put(Variable.STRING_TRANSACTION_ID, transactionId);
         contentValues.put(Variable.STRING_GIVER_PHONE,giverPhone);
         contentValues.put(Variable.STRING_TAKER_PHONE,takerPhone);
         contentValues.put(Variable.STRING_AMOUNT,amount);
@@ -220,7 +223,10 @@ public class TransactionTable implements ITable{
     public List<TransactionTable> toTransactionTables(List<ITable> iTables) {
         List<TransactionTable> transactionTables = new ArrayList<TransactionTable>();
         for (ITable iTable: iTables) {
+
             TransactionTable transactionTable = (TransactionTable) iTable.toClone();
+            Log.d("TRANS-I", iTable.toString());
+            Log.d("TRANS", transactionTable.toString());
             transactionTables.add(transactionTable);
         }
         return transactionTables;
