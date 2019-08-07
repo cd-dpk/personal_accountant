@@ -32,6 +32,7 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
 
     RecyclerView accountRecyclerView;
     List<Account> accounts = new ArrayList<Account>();
+    View cardAccountView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,22 +40,28 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
         Toolbar toolbar = findViewById(id.toolbar);
         setSupportActionBar(toolbar);
 
+        cardAccountView = (View) findViewById(id.view_card_accounts_transaction_net);
         accountRecyclerView = (RecyclerView) findViewById(id.recycler_view_account_list);
         accountRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         accountRecyclerView.setHasFixedSize(true);
+
         // Data
         PersonalAccountant personalAccountant = new PersonalAccountant(this);
         AccountTable exclusiveAccount = personalAccountant.getLoggedAccount();
+        Account myAccount = new Account(exclusiveAccount);
+        myAccount.setGivenTo(personalAccountant.getTotalAmountGivenTo(exclusiveAccount));
+        myAccount.setTakenFrom(personalAccountant.getTotalAmountTakenFrom(exclusiveAccount));
+
         accounts = personalAccountant.fromTableToObject(personalAccountant.getAllAccountsExcept(exclusiveAccount));
         for (Account account: accounts){
             account.setGivenTo(personalAccountant.getTotalAmountGivenTo(new AccountTable(account),exclusiveAccount));
             account.setTakenFrom(personalAccountant.getTotalAmountTakenFrom(new AccountTable(account),exclusiveAccount));
         }
         // Data
+        setAccountCardView(myAccount);
         RecyclerViewListAdapter accountRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this, layout.card_account,accounts.size());
         accountRecyclerView.setAdapter(accountRecyclerViewListAdapter);
-
         FloatingActionButton fab = findViewById(id.ft_account_list_add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +70,7 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
                 startActivity(intent);
             }
         });
+
     }
 
 
@@ -109,4 +117,22 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
             startActivity(intent);
         }
     }
+
+    private void setAccountCardView(Account account) {
+        TextView givenToText, takenFromText, amountNetText;
+        givenToText = (TextView) cardAccountView.findViewById(R.id.text_view_card_transaction_net_given_to);
+        takenFromText = (TextView) cardAccountView.findViewById(R.id.text_view_card_transaction_net_taken_from);
+        amountNetText = (TextView) cardAccountView.findViewById(R.id.text_view_card_transaction_net_account_amount_net);
+
+        givenToText.setText(account.getGivenTo()+"");
+        takenFromText.setText(account.getTakenFrom()+"");
+        double diff = account.getGivenTo()-account.getTakenFrom();
+        amountNetText.setText(diff+"");
+        amountNetText.setTextColor(getResources().getColor(R.color.red));
+        if (diff>=0){
+            amountNetText.setText("+"+diff);
+            amountNetText.setTextColor(getResources().getColor(R.color.green));
+        }
+    }
+
 }

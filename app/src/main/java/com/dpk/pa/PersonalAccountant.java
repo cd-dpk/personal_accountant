@@ -129,12 +129,47 @@ public class PersonalAccountant {
         }
         return -1;
     }
+    public double getTotalAmountGivenTo(AccountTable ownerAccount){
+        List<Tuple> tuples = new ArrayList<Tuple>();
+        Tuple tuple = new Tuple("select sum("+ TransactionTable.Variable.STRING_AMOUNT+") as given_to from "+new TransactionTable().tableName());
+        tuple.setWhereClause(TransactionTable.Variable.STRING_GIVER_PHONE+"='"+ownerAccount.getPhone()+"'");
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<ITable> iTables = dataBaseHelper.selectRows(tuple);
+        Tuple qTuple = new Tuple();
+        if (iTables.size()==1){
+            Log.d("VAL", iTables.get(0).toString());
+            qTuple = (Tuple) iTables.get(0).toClone();
+            double amount = 0.0;
+            if (!qTuple.values.get("given_to").equals("")){
+                amount = Double.parseDouble(qTuple.values.get("given_to"));
+            }
+            return amount;
+        }
+        return -1;
+    }
 
     public double getTotalAmountTakenFrom(AccountTable targetAccount, AccountTable ownerAccount){
         List<Tuple> tuples = new ArrayList<Tuple>();
         Tuple tuple = new Tuple("select  sum("+ TransactionTable.Variable.STRING_AMOUNT+") as taken_from from "+new TransactionTable().tableName());
         tuple.setWhereClause(TransactionTable.Variable.STRING_GIVER_PHONE+"='"+targetAccount.getPhone()+
                 "' and "+TransactionTable.Variable.STRING_TAKER_PHONE+"='"+ownerAccount.getPhone()+"'");
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<ITable> iTables = dataBaseHelper.selectRows(tuple);
+        Tuple qTuple = new Tuple();
+        if (iTables.size()==1){
+            qTuple = (Tuple) iTables.get(0).toClone();
+            double amount = 0.0;
+            if (!qTuple.values.get("taken_from").equals("")){
+                amount = Double.parseDouble(qTuple.values.get("taken_from"));
+            }
+            return amount;
+        }
+        return 0.0;
+    }
+    public double getTotalAmountTakenFrom(AccountTable ownerAccount){
+        List<Tuple> tuples = new ArrayList<Tuple>();
+        Tuple tuple = new Tuple("select  sum("+ TransactionTable.Variable.STRING_AMOUNT+") as taken_from from "+new TransactionTable().tableName());
+        tuple.setWhereClause(TransactionTable.Variable.STRING_TAKER_PHONE+"='"+ownerAccount.getPhone()+"'");
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         List<ITable> iTables = dataBaseHelper.selectRows(tuple);
         Tuple qTuple = new Tuple();
