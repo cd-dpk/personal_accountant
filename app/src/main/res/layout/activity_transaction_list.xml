@@ -36,7 +36,7 @@
             android:layout_weight="1.25"
             />
     </LinearLayout>
-    <include layout="@layout/card_transaction_net"
+    <include layout="@layout/card_transactions_net"
         android:id="@+id/view_card_transaction_net"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -47,7 +47,7 @@ public class TransactionListActivity extends AppCompatActivity implements OnRecy
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         TextView toolbarTitleText = (TextView) findViewById(R.id.toolbar_title);
-        toolbarTitleText.setText("Previous Transactions");
+        toolbarTitleText.setText("Previous TransactionsType");
 
         cardAccountView = (View) findViewById(R.id.view_card_transaction_net);
         personalAccountant = new PersonalAccountant(this);

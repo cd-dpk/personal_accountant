@@ -31,4 +31,7 @@
     <string name="account_open_description_display">Type Descrition of Transaction</string>
     <string name="account_net_amount">Net Amount</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

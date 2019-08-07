@@ -8,57 +8,64 @@
     android:padding="10dp"
     android:orientation="vertical"
     tools:context="com.dpk.pa.pages.TransactionAddActivity">
-
     <include
         android:id="@+id/transaction_add_progress_view"
         layout="@layout/view_progress_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
     </include>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="10dp"
-        android:weightSum="2">
+        android:weightSum="3"
+        android:layout_marginTop="100dp">
         <TextView
-            android:id="@+id/text_view_transaction_add_spinner_giver_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="@string/giver_label"/>
-        <Spinner
-            android:id="@+id/spinner_giver"
-            android:layout_gravity="center"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_weight="1.25"
-            />
+            android:text="Transaction Type"
+            android:layout_weight="1.25"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rg_transaction_add_type"
+            android:checkedButton="@+id/rb_transaction_add_type_given"
+            android:orientation="horizontal"
+            android:layout_weight="1.75">
+            <RadioButton
+                android:id="@+id/rb_transaction_add_type_given"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/transaction_type_passive_given"/>
+            <RadioButton
+                android:id="@+id/rb_transaction_add_type_taken"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/transaction_type_passive_taken"/>
+        </RadioGroup>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="10dp"
+        android:layout_gravity="center"
         android:weightSum="2">
         <TextView
-            android:id="@+id/text_view_transaction_add_spinner_taker_label"
+            android:id="@+id/text_view_transaction_add_spinner_person_label"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="@string/taker_label"/>
+            android:text="@string/person"/>
         <Spinner
-            android:id="@+id/spinner_taker"
+            android:id="@+id/spinner_transaction_add_person"
             android:layout_gravity="center"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:layout_weight="1.25"
+            android:layout_weight="1.00"
             />
     </LinearLayout>
 
