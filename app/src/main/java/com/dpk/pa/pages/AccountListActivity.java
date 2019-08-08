@@ -3,6 +3,8 @@ package com.dpk.pa.pages;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -33,12 +35,15 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
     RecyclerView accountRecyclerView;
     List<Account> accounts = new ArrayList<Account>();
     View cardAccountView;
+    PersonalAccountant personalAccountant;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_account_list);
         Toolbar toolbar = findViewById(id.toolbar);
         setSupportActionBar(toolbar);
+        personalAccountant = new PersonalAccountant(this);
+        checkRegistration(personalAccountant);
 
         cardAccountView = (View) findViewById(id.view_card_accounts_transaction_net);
         accountRecyclerView = (RecyclerView) findViewById(id.recycler_view_account_list);
@@ -46,7 +51,7 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
         accountRecyclerView.setHasFixedSize(true);
 
         // Data
-        PersonalAccountant personalAccountant = new PersonalAccountant(this);
+        personalAccountant = new PersonalAccountant(this);
         AccountTable exclusiveAccount = personalAccountant.getLoggedAccount();
         Account myAccount = new Account(exclusiveAccount);
         myAccount.setGivenTo(personalAccountant.getTotalAmountGivenTo(exclusiveAccount));
@@ -72,7 +77,6 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
         });
 
     }
-
 
     @Override
     public void listenItem(View view, final int position) {
@@ -135,4 +139,10 @@ public class AccountListActivity extends AppCompatActivity implements OnRecycler
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.game_menu, menu);
+        return true;
+    }
 }

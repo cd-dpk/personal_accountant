@@ -9,23 +9,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".pages.TransactionAddActivity">
+        <activity
+            android:name=".pages.TransactionHomeActivity"
+            android:label="@string/page_transaction_home"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".pages.TransactionAddActivity"
+            android:label="@string/page_transaction_add"
+            android:parentActivityName=".pages.TransactionListActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".pages.TransactionHomeActivity" />
         </activity>
         <activity
             android:name=".pages.TransactionListActivity"
-            android:label="@string/title_activity_transaction_list"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:label="@string/title_activity_transaction_list"></activity>
         <activity
             android:name=".pages.AccountListActivity"
             android:label="@string/title_activity_account_list"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity android:name=".pages.AccountOpenActivity" >
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".pages.AccountOpenActivity"
+            android:label="@string/page_account_open"
+            android:parentActivityName=".pages.TransactionHomeActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".pages.TransactionHomeActivity" />
         </activity>
         <activity android:name=".pages.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -42,16 +42,12 @@ public class TransactionListActivity extends AppCompatActivity implements OnRecy
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_list);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        TextView toolbarTitleText = (TextView) findViewById(R.id.toolbar_title);
-        toolbarTitleText.setText("Previous TransactionsType");
 
         cardAccountView = (View) findViewById(R.id.view_card_account);
         personalAccountant = new PersonalAccountant(this);
 
-        loggedPerson = getIntent().getStringExtra(ApplicationConstants.LOGGED_USER_PHONE_LABEL).toString();
-        targetPerson = getIntent().getStringExtra(ApplicationConstants.TARGET_USER_PHONE_LABEL).toString();
+        loggedPerson = ApplicationConstants.LOGGED_PHONE_NUMBER;
+        targetPerson = ApplicationConstants.TARGET_USER_PHONE;
 
         Log.d("CHECK-0", loggedPerson);
         Log.d("CHECK-1", targetPerson);

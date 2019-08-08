@@ -67,7 +67,7 @@ public class WelcomeActivity extends AppCompatActivity implements IRegistration 
     public void checkRegistration(PersonalAccountant personalAccountant) {
         if (personalAccountant.isRegistered()) {
             Log.d(RegistrationConstants.USER_PHONE, ApplicationConstants.LOGGED_PHONE_NUMBER);
-            Intent intent = new Intent(WelcomeActivity.this, AccountListActivity.class);
+            Intent intent = new Intent(WelcomeActivity.this, TransactionHomeActivity.class);
             startActivity(intent);
         }
     }

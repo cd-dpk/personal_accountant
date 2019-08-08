@@ -1,5 +1,6 @@
 package com.dpk.pa.pages;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -54,7 +55,6 @@ public class TransactionAddActivity extends AppCompatActivity implements IRegist
         amountText = (TextInputEditText) findViewById(R.id.edit_text_transaction_add_amount);
         descriptionText  = (TextInputEditText) findViewById(R.id.edit_text_transaction_add_description);
         transactionAddButton = (Button) findViewById(R.id.button_transaction_add_add);
-
         personalAccountant = new PersonalAccountant(TransactionAddActivity.this);
         loggedAccount = new AccountTable();
         loggedAccount.setPhone(ApplicationConstants.LOGGED_PHONE_NUMBER);
