@@ -110,6 +110,20 @@ public class PersonalAccountant {
         }
         return  phoneNumbers;
     }
+
+    public Account getTargetAccountDetails(AccountTable targetAccount, AccountTable loggedAccount){
+        Account returnAccount = null;
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        targetAccount.setWhereClause(AccountTable.Variable.STRING_PHONE+"  = '"+targetAccount.getPhone()+"'");
+        List<ITable> iTables = dataBaseHelper.selectRows(targetAccount);
+        if (iTables.size()==1){
+            returnAccount = new Account((AccountTable) iTables.get(0));
+            returnAccount.setGivenTo(getTotalAmountGivenTo(targetAccount, loggedAccount));
+            returnAccount.setTakenFrom(getTotalAmountTakenFrom(targetAccount, loggedAccount));
+            return  returnAccount;
+        }
+        else {return null;}
+    }
     public double getTotalAmountGivenTo(AccountTable targetAccount, AccountTable ownerAccount){
         List<Tuple> tuples = new ArrayList<Tuple>();
         Tuple tuple = new Tuple("select sum("+ TransactionTable.Variable.STRING_AMOUNT+") as given_to from "+new TransactionTable().tableName());

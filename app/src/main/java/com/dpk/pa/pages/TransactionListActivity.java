@@ -21,8 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -34,12 +33,11 @@ public class TransactionListActivity extends AppCompatActivity implements OnRecy
 
     List<TransactionTable> transactionList = new ArrayList<TransactionTable>();
     List<AccountTable> accountList = new ArrayList<AccountTable>();
-    Spinner otherPersonsSpinner;
-    List<String> persons = new ArrayList<String>();
+    List<String> personPhoneNumbers = new ArrayList<String>();
     String loggedPerson="", targetPerson="";
     PersonalAccountant personalAccountant;
     AccountTable loggedAccount, targetAccount;
-
+    int selectedPersonID = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +47,7 @@ public class TransactionListActivity extends AppCompatActivity implements OnRecy
         TextView toolbarTitleText = (TextView) findViewById(R.id.toolbar_title);
         toolbarTitleText.setText("Previous TransactionsType");
 
-        cardAccountView = (View) findViewById(R.id.view_card_transaction_net);
+        cardAccountView = (View) findViewById(R.id.view_card_account);
         personalAccountant = new PersonalAccountant(this);
 
         loggedPerson = getIntent().getStringExtra(ApplicationConstants.LOGGED_USER_PHONE_LABEL).toString();
@@ -58,34 +56,19 @@ public class TransactionListActivity extends AppCompatActivity implements OnRecy
         Log.d("CHECK-0", loggedPerson);
         Log.d("CHECK-1", targetPerson);
 
-
-        transactionRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_account_list);
+        transactionRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_transaction_list);
         transactionRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         transactionRecyclerView.setHasFixedSize(true);
 
-        otherPersonsSpinner = (Spinner) findViewById(R.id.transaction_list_spinner_person);
-
         // Data
         loggedAccount = new AccountTable();
-        targetAccount=new AccountTable();
         loggedAccount.setPhone(loggedPerson);
-        targetAccount.setPhone(targetPerson);
-        transactionList = personalAccountant.getTransactionsBetween(loggedAccount, targetAccount, false);
         accountList = personalAccountant.getAllAccountsExcept(loggedAccount);
-        persons = personalAccountant.phoneNumbers(accountList);
-        Account targetPersonAccount = new Account(targetAccount);
-        targetPersonAccount.setGivenTo(personalAccountant.getTotalAmountGivenTo(new AccountTable(targetPersonAccount),loggedAccount));
-        targetPersonAccount.setTakenFrom(personalAccountant.getTotalAmountTakenFrom(new AccountTable(targetPersonAccount),loggedAccount));
-        setAccountCardView(targetPersonAccount);
+        personPhoneNumbers = personalAccountant.phoneNumbers(accountList);
+
+        loadChangeableData(targetPerson);
         // Data
 
-        ArrayAdapter<String> personsSpinnerAdapter = new ArrayAdapter<String >(TransactionListActivity.this,
-                android.R.layout.simple_list_item_1,persons);
-        otherPersonsSpinner.setAdapter(personsSpinnerAdapter);
-
-        RecyclerViewListAdapter accountRecyclerViewListAdapter = new RecyclerViewListAdapter(
-                this,R.layout.card_transaction, transactionList.size());
-        transactionRecyclerView.setAdapter(accountRecyclerViewListAdapter);
         FloatingActionButton fab = findViewById(R.id.transaction_list_ft_add_transaction);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,14 +77,32 @@ public class TransactionListActivity extends AppCompatActivity implements OnRecy
                 startActivity(intent);
             }
         });
+
+    }
+
+    private void loadChangeableData(String targetPerson) {
+        targetAccount=new AccountTable();
+        targetAccount.setPhone(targetPerson);
+        transactionList = personalAccountant.getTransactionsBetween(loggedAccount, targetAccount, false);
+        Account targetPersonAccount = personalAccountant.getTargetAccountDetails(targetAccount, loggedAccount);
+        setAccountCardView(targetPersonAccount);
+        RecyclerViewListAdapter accountRecyclerViewListAdapter = new RecyclerViewListAdapter(
+                this,R.layout.card_transaction, transactionList.size());
+        transactionRecyclerView.setAdapter(accountRecyclerViewListAdapter);
     }
 
     private void setAccountCardView(Account account) {
-        TextView givenToText, takenFromText, amountNetText;
-        givenToText = (TextView) cardAccountView.findViewById(R.id.text_view_card_transaction_net_given_to);
-        takenFromText = (TextView) cardAccountView.findViewById(R.id.text_view_card_transaction_net_taken_from);
-        amountNetText = (TextView) cardAccountView.findViewById(R.id.text_view_card_transaction_net_account_amount_net);
+        TextView phoneText, nameText, givenToText, takenFromText, amountNetText;
+        ImageButton rightArrowButton;
+        phoneText = (TextView) findViewById(R.id.text_view_card_account_phone);
+        nameText = (TextView) findViewById(R.id.text_view_card_account_name);
+        givenToText = (TextView) findViewById(R.id.text_view_card_account_given_to);
+        takenFromText = (TextView) findViewById(R.id.text_view_card_account_taken_from);
+        rightArrowButton = (ImageButton) findViewById(R.id.button_card_account_right_arrow);
+        amountNetText = (TextView) findViewById(R.id.text_view_card_account_account_amount_net);
 
+        phoneText.setText(account.getPhone());
+        nameText.setText(account.getName());
         givenToText.setText(account.getGivenTo()+"");
         takenFromText.setText(account.getTakenFrom()+"");
         double diff = account.getGivenTo()-account.getTakenFrom();
@@ -111,6 +112,7 @@ public class TransactionListActivity extends AppCompatActivity implements OnRecy
             amountNetText.setText("+"+diff);
             amountNetText.setTextColor(getResources().getColor(R.color.green));
         }
+        rightArrowButton.setVisibility(View.GONE);
     }
 
     @Override

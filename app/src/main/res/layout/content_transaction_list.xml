@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/scrollbar_wish">
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_account_list"
+                android:id="@+id/recycler_view_transaction_list"
                 android:scrollbars="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

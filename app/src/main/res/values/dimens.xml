@@ -8,7 +8,7 @@
     <dimen name="card_account_margin">10dp</dimen>
     <dimen name="card_account_padding">5dp</dimen>
     <!--<dimen name="card_account_width">350dp</dimen>-->
-    <dimen name="card_account_height">100dp</dimen>
+    <dimen name="card_account_height">60dp</dimen>
     <dimen name="card_account_phone">100dp</dimen>
     <dimen name="card_account_name">100dp</dimen>
     <dimen name="card_account_deposit_label">100dp</dimen>

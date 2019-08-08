@@ -13,41 +13,18 @@
         android:layout_below="@+id/app_bar"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
-    <LinearLayout
-        android:id="@+id/target_person_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_below="@+id/activity_transaction_list_text_horizontal_line"
-        android:weightSum="2">
-        <TextView
-            android:id="@+id/text_view_transaction_list_spinner_label"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/person"/>
-        <Spinner
-            android:id="@+id/transaction_list_spinner_person"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.25"
-            />
-    </LinearLayout>
-    <include layout="@layout/card_transactions_net"
-        android:id="@+id/view_card_transaction_net"
+    <include layout="@layout/card_account"
+        android:id="@+id/view_card_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/target_person_details"
+        android:layout_below="@+id/activity_transaction_list_text_horizontal_line"
         />
     <include layout="@layout/content_transaction_list"
         android:id="@+id/content_list"
         android:layout_width="match_parent"
         android:layout_marginTop="2dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/view_card_transaction_net"
+        android:layout_below="@+id/view_card_account"
         android:layout_above="@+id/lay_bottom_bar"
         />
     <include
@@ -58,5 +35,5 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"  />
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
