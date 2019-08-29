@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/AppTheme.GrayColorPrimary"
     tools:context="com.dpk.pa.pages.WelcomeActivity">
 
     <LinearLayout
@@ -27,6 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/text_view_welcome_message"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
             android:text="@string/welcome_msg"
             android:layout_weight="1"
             />
@@ -58,7 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/edit_text_name"
-                    android:hint="@string/account_open_phone_display"
+                    android:hint="@string/account_open_name_display"
                     />
             </com.google.android.material.textfield.TextInputLayout>
             <Button

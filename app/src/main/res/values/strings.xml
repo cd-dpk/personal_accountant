@@ -57,5 +57,6 @@
     <string name="menu_new_transaction">New Transaction</string>
     <string name="page_account_open">Add New Account</string>
     <string name="page_transaction_add">Add New Transaction</string>
+    <string name="page_transaction_aboutDev">About Developer(s)</string>
 
 </resources>

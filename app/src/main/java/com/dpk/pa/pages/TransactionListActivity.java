@@ -37,7 +37,6 @@ public class TransactionListActivity extends AppCompatActivity implements OnRecy
     String loggedPerson="", targetPerson="";
     PersonalAccountant personalAccountant;
     AccountTable loggedAccount, targetAccount;
-    int selectedPersonID = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,8 +87,15 @@ public class TransactionListActivity extends AppCompatActivity implements OnRecy
     }
 
     private void setAccountCardView(Account account) {
+        TextView detailedTransactionsText;
+        View textHorizontalLineView;
+
         TextView phoneText, nameText, givenToText, takenFromText, amountNetText;
         ImageButton rightArrowButton;
+
+        textHorizontalLineView = (View) findViewById(R.id.content_transaction_list_text_horizontal_line);
+        detailedTransactionsText = (TextView) textHorizontalLineView.findViewById(R.id.text_horizontal_line_text);
+
         phoneText = (TextView) findViewById(R.id.text_view_card_account_phone);
         nameText = (TextView) findViewById(R.id.text_view_card_account_name);
         givenToText = (TextView) findViewById(R.id.text_view_card_account_given_to);
@@ -97,6 +103,7 @@ public class TransactionListActivity extends AppCompatActivity implements OnRecy
         rightArrowButton = (ImageButton) findViewById(R.id.button_card_account_right_arrow);
         amountNetText = (TextView) findViewById(R.id.text_view_card_account_account_amount_net);
 
+        detailedTransactionsText.setText("Transactions Breakdown");
         phoneText.setText(account.getPhone());
         nameText.setText(account.getName());
         givenToText.setText(account.getGivenTo()+"");

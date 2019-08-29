@@ -142,7 +142,7 @@ public class AccountOpenActivity extends AppCompatActivity implements IRegistrat
             super.onPostExecute(s);
             progressView.setVisibility(View.GONE);
             if (s.equals(Boolean.TRUE.toString())) {
-                Intent intent = new Intent(AccountOpenActivity.this, AccountListActivity.class);
+                Intent intent = new Intent(AccountOpenActivity.this, TransactionHomeActivity.class);
                 startActivity(intent);
             }
         }

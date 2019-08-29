@@ -3,23 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/colorPrimary">
-
-    <include layout="@layout/app_bar"
-        android:id="@+id/app_bar"
-        />
-    <include
-        layout="@layout/text_horizontal_line"
-        android:id="@+id/activity_transaction_list_text_horizontal_line"
-        android:layout_below="@+id/app_bar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"/>
+    android:background="@color/colorAccent">
 
     <include layout="@layout/card_account"
         android:id="@+id/view_card_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/app_bar"
         />
     <include layout="@layout/content_transaction_list"
         android:id="@+id/content_list"
@@ -33,9 +22,8 @@
         android:id="@+id/lay_bottom_bar"
         layout="@layout/footer"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/text_length"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"  />
 </RelativeLayout>

@@ -41,10 +41,14 @@ import java.util.List;
 public class TransactionHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnRecyclerViewItemListener, IRegistration {
 
+    NavigationView navigationView;
     RecyclerView accountRecyclerView;
     List<Account> accounts = new ArrayList<Account>();
     View cardAccountView;
     PersonalAccountant personalAccountant;
+
+    TextView loggedPersonPhoneText;
+    TextView loggedPersonNameText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,14 +81,6 @@ public class TransactionHomeActivity extends AppCompatActivity
         RecyclerViewListAdapter accountRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this, R.layout.card_account,accounts.size());
         accountRecyclerView.setAdapter(accountRecyclerViewListAdapter);
-        FloatingActionButton fab = findViewById(R.id.ft_account_list_add);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(TransactionHomeActivity.this, AccountOpenActivity.class);
-                startActivity(intent);
-            }
-        });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -93,6 +89,7 @@ public class TransactionHomeActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        setupNavigationHeader(personalAccountant.getLoggedAccount());
     }
 
     @Override
@@ -127,6 +124,15 @@ public class TransactionHomeActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    protected void setupNavigationHeader(AccountTable loggedAccountTable) {
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View header = navigationView.getHeaderView(0);
+        loggedPersonPhoneText = (TextView) header.findViewById(R.id.text_view_nav_header_phone);
+        loggedPersonNameText = (TextView) header.findViewById(R.id.text_view_nav_header_name);
+
+        loggedPersonPhoneText.setText(loggedAccountTable.getPhone());
+        loggedPersonNameText.setText(loggedAccountTable.getName());
+    }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -140,12 +146,13 @@ public class TransactionHomeActivity extends AppCompatActivity
             Intent intent = new Intent(this, AccountOpenActivity.class);
             startActivity(intent);
         }
-        else if (id == R.id.nav_new_transaction) {
-            Intent intent = new Intent(this, TransactionListActivity.class);
-            startActivity(intent);
-        }
+//        else if (id == R.id.nav_new_transaction) {
+//            Intent intent = new Intent(this, TransactionAddActivity.class);
+//            startActivity(intent);
+//        }
         else if (id == R.id.nav_info) {
-
+            Intent intent = new Intent(this, AboutDevActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -154,11 +161,18 @@ public class TransactionHomeActivity extends AppCompatActivity
     }
 
     private void setAccountCardView(Account account) {
+        TextView detailedAccountsTransactions;
+        View textHorizontalLineView;
+
+        TextView netTransactionTextView;
         TextView givenToText, takenFromText, amountNetText;
+
+        netTransactionTextView = (TextView) cardAccountView.findViewById(R.id.text_horizontal_line_text);
         givenToText = (TextView) cardAccountView.findViewById(R.id.text_view_card_transaction_net_given_to);
         takenFromText = (TextView) cardAccountView.findViewById(R.id.text_view_card_transaction_net_taken_from);
         amountNetText = (TextView) cardAccountView.findViewById(R.id.text_view_card_transaction_net_account_amount_net);
 
+        netTransactionTextView.setText("Net Transactions");
         givenToText.setText(account.getGivenTo()+"");
         takenFromText.setText(account.getTakenFrom()+"");
         double diff = account.getGivenTo()-account.getTakenFrom();
@@ -168,6 +182,9 @@ public class TransactionHomeActivity extends AppCompatActivity
             amountNetText.setText("+"+diff);
             amountNetText.setTextColor(getResources().getColor(R.color.green));
         }
+        textHorizontalLineView = (View) findViewById(R.id.content_account_list_text_horizontal_line);
+        detailedAccountsTransactions = (TextView) textHorizontalLineView.findViewById(R.id.text_horizontal_line_text);
+        detailedAccountsTransactions.setText("Transactions Breakdown");
     }
 
     @Override

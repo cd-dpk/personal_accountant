@@ -102,7 +102,7 @@ public class WelcomeActivity extends AppCompatActivity implements IRegistration 
             super.onPostExecute(s);
             progressView.setVisibility(View.GONE);
             if (s.equals(Boolean.TRUE.toString())){
-                Intent intent = new Intent(WelcomeActivity.this, AccountListActivity.class);
+                Intent intent = new Intent(WelcomeActivity.this, TransactionHomeActivity.class);
                 startActivity(intent);
             }
         }

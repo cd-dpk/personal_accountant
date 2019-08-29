@@ -4,20 +4,30 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/transaction_person_64"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity android:name=".pages.AboutDevActivity"
+            android:label="@string/page_transaction_aboutDev"
+            android:parentActivityName=".pages.TransactionHomeActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".pages.TransactionHomeActivity" />
+        </activity>
+
         <activity
             android:name=".pages.TransactionHomeActivity"
             android:label="@string/page_transaction_home"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".pages.TransactionAddActivity"
             android:label="@string/page_transaction_add"
             android:parentActivityName=".pages.TransactionListActivity">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -25,15 +35,19 @@
         </activity>
         <activity
             android:name=".pages.TransactionListActivity"
-            android:label="@string/title_activity_transaction_list"></activity>
-        <activity
-            android:name=".pages.AccountListActivity"
-            android:label="@string/title_activity_account_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_transaction_list"
+            android:parentActivityName=".pages.TransactionHomeActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".pages.TransactionHomeActivity" />
+        </activity>
         <activity
             android:name=".pages.AccountOpenActivity"
             android:label="@string/page_account_open"
             android:parentActivityName=".pages.TransactionHomeActivity">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

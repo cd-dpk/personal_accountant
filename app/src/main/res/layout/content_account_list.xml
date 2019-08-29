@@ -34,11 +34,4 @@
             </androidx.recyclerview.widget.RecyclerView>
         </ScrollView>
     </LinearLayout>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/ft_account_list_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/plus_green" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
