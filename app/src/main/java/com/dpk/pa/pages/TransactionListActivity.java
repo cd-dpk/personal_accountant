@@ -42,8 +42,10 @@ public class TransactionListActivity extends AppCompatActivity implements OnRecy
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_list);
 
-        cardAccountView = (View) findViewById(R.id.view_card_account);
         personalAccountant = new PersonalAccountant(this);
+        personalAccountant.setLanguageInApp();
+
+        cardAccountView = (View) findViewById(R.id.view_card_account);
 
         loggedPerson = ApplicationConstants.LOGGED_PHONE_NUMBER;
         targetPerson = ApplicationConstants.TARGET_USER_PHONE;

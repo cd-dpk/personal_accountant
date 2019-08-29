@@ -41,6 +41,7 @@ public class AccountOpenActivity extends AppCompatActivity implements IRegistrat
         setContentView(R.layout.activity_account_open);
 
         personalAccountant = new PersonalAccountant(this);
+        personalAccountant.setLanguageInApp();
         checkRegistration(personalAccountant);
 
         phoneText = (TextInputEditText) findViewById(R.id.edit_text_phone_number_open);

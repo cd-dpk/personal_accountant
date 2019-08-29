@@ -2,6 +2,8 @@ package com.dpk.pa;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.dpk.pa.data.constants.ApplicationConstants;
@@ -15,7 +17,12 @@ import com.dpk.pa.data_models.db.Tuple;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+/**
+ * created by chandradasdipok @ 2019-Aug-10
+ * last modified 2019-Aug-29
+ */
 public class PersonalAccountant {
 
     private Context context;
@@ -39,7 +46,7 @@ public class PersonalAccountant {
         ApplicationConstants.LOGGED_PHONE_NUMBER = phone;
         editor.putString(RegistrationConstants.USER_PHONE, ApplicationConstants.LOGGED_PHONE_NUMBER);
         editor.commit();
-        return false;
+        return true;
     }
     public boolean insertAccountIntoDB(AccountTable accountTable){
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
@@ -213,5 +220,33 @@ public class PersonalAccountant {
             return true;
         }
         return false;
+    }
+
+    public String loadLanguage(){
+        sharedPreferences = context.getSharedPreferences(RegistrationConstants.APPLICATION_PREFERENCE,
+                Context.MODE_PRIVATE);
+        ApplicationConstants.LANGUAGE_CODE = sharedPreferences.getString(ApplicationConstants.LANGUAGE_CODE_LABEL,
+                ApplicationConstants.LANGUAGE_CODE_ENGLISH);
+        return ApplicationConstants.LANGUAGE_CODE;
+    }
+    public boolean saveLanguage(String language_code){
+        sharedPreferences = context.getSharedPreferences(RegistrationConstants.APPLICATION_PREFERENCE,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Log.d("LANG_PA_S", language_code);
+        editor.putString(ApplicationConstants.LANGUAGE_CODE_LABEL, language_code);
+        ApplicationConstants.LANGUAGE_CODE = language_code;
+        editor.commit();
+        return true;
+    }
+
+    public void setLanguageInApp() {
+        String language_code = loadLanguage();
+        Log.d("LANG_PA", language_code);
+        Resources res = context.getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(language_code.toLowerCase());
+        res.updateConfiguration(conf, dm);
     }
 }

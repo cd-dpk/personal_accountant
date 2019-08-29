@@ -29,7 +29,10 @@ public class WelcomeActivity extends AppCompatActivity implements IRegistration 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
         personalAccountant = new PersonalAccountant(this);
+        personalAccountant.setLanguageInApp();
+
         checkRegistration(personalAccountant);
 
         phoneText = (EditText) findViewById(R.id.edit_text_phone_number);

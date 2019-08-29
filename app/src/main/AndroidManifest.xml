@@ -9,20 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".pages.AboutDevActivity"
+        <activity android:name=".pages.SettingsActivity"
+            android:label="@string/settings"></activity>
+        <activity
+            android:name=".pages.AboutDevActivity"
             android:label="@string/page_transaction_aboutDev"
             android:parentActivityName=".pages.TransactionHomeActivity">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".pages.TransactionHomeActivity" />
         </activity>
-
         <activity
             android:name=".pages.TransactionHomeActivity"
             android:label="@string/page_transaction_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".pages.TransactionAddActivity"
             android:label="@string/page_transaction_add"

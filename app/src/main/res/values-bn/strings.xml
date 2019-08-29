@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">লেনদেন</string>
+    <!-- Pages' Name-->
+    <string name="page_transaction_home">লেনদেন হোম</string>
+    <string name="page_transactions">লেনদেন</string>
+    <!-- Pages' Name-->
+    <string name="welcome_msg">স্বাগতম! আমি আপনার আচ্চউতান্ত!\n</string>
+    <string name="account_open_msg">নতুন অ্যাকাউন্ট খুলুন!</string>
+    <string name="account_open_phone_display">ফোন নম্বর টাইপ করুণ</string>
+    <string name="account_open_name_display">নাম টাইপ করুণ</string>
+    <string name="title_activity_account_list">অ্যাকাউন্টস</string>
+    <string name="title_activity_transaction_list">পূর্বের লেন্দেন্সমুহ</string>
+    <string name="giver_label">প্রদানকারী </string>
+    <string name="taker_label">গ্রহণকারী </string>
+    <string name="transaction_type_give">প্রধান</string>
+    <string name="transaction_type_take">গ্রহণ</string>
+    <string name="transaction_attr_amount">টাকার পরিমাণ</string>
+    <string name="description_label">বর্ণনা</string>
+    <string name="button_transaction_add">যোগ</string>
+    <string name="transaction_type_passive_given">প্রদান</string>
+    <string name="transaction_type_passive_taken">গ্রহণ</string>
+    <string name="account_attr_phone">ফোন</string>
+    <string name="account_attr_name">নাম</string>
+    <string name="amount_label">পরিমাণ</string>
+    <string name="author">DPK-Solutions</string>
+    <string name="pull_to_refresh">Pull to Refresh!</string>
+    <string name="person">Person</string>
+    <string name="account_open_amount_display">টাকার পরিমাণ টাইপ করুণ</string>
+    <string name="transaction_type_passive_taken_amount">গৃহীত টাকার পরিমাণ</string>
+    <string name="transaction_type_passive_given_amount">দানকৃত টাকার পরিমাণ</string>
+    <string name="transaction_date">লেনদেনের সময়</string>
+    <string name="transaction_description">লেনদেনের বর্ণনা</string>
+    <string name="account_open_description_display">লেনদেনের বর্ণনা</string>
+    <string name="account_net_amount">নীট টাকার পরিমাণ</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settings">সিটিংস</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">ফোন</string>
+    <string name="nav_header_subtitle">নাম</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">সিটিংস</string>
+
+    <string name="menu_home">হোম</string>
+    <string name="menu_about_us">অ্যাপ ইনফো</string>
+    <string name="menu_add_account">নতুন অ্যাকাউন্ট</string>
+    <string name="menu_new_transaction">নতুন লেনদেন</string>
+    <string name="page_account_open">নতুন অ্যাকাউন্ট খুলুন </string>
+    <string name="page_transaction_add">লেনদেন যোগ করুন</string>
+    <string name="page_transaction_aboutDev">ডেভেলাপার</string>
+    <string name="choose_your_language">ভাষা নির্বাচন করুণ</string>
+    <string name="bangla">বাংলা</string>
+    <string name="english">ইংরেজি</string>
+    <string name="transaction_type">লেনদেনের ধরণ</string>
+    <string name="account_open">অ্যাকাউন্ট খুলুন</string>
+
+</resources>

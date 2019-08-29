@@ -44,6 +44,8 @@ public class TransactionAddActivity extends AppCompatActivity implements IRegist
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_add);
+        personalAccountant = new PersonalAccountant(TransactionAddActivity.this);
+        personalAccountant.setLanguageInApp();
 
         progressView = (View) findViewById(R.id.transaction_add_progress_view);
         transactionTypeRadioGroup = (RadioGroup) findViewById(R.id.rg_transaction_add_type);
@@ -60,7 +62,6 @@ public class TransactionAddActivity extends AppCompatActivity implements IRegist
         Log.d("CHECK-0", loggedPerson);
         Log.d("CHECK-1", targetPerson);
 
-        personalAccountant = new PersonalAccountant(TransactionAddActivity.this);
         loggedAccount = new AccountTable();
         loggedAccount.setPhone(ApplicationConstants.LOGGED_PHONE_NUMBER);
 

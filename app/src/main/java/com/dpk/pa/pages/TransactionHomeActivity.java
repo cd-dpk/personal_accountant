@@ -56,7 +56,11 @@ public class TransactionHomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         personalAccountant = new PersonalAccountant(this);
+        personalAccountant.setLanguageInApp();
+        Log.d("LANG",ApplicationConstants.LANGUAGE_CODE);
+
         checkRegistration(personalAccountant);
 
         cardAccountView = (View) findViewById(R.id.view_card_accounts_transaction_net);
@@ -118,7 +122,8 @@ public class TransactionHomeActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(TransactionHomeActivity.this, SettingsActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
