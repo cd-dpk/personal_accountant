@@ -9,8 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".pages.SettingsActivity"
-            android:label="@string/settings"></activity>
+        <activity
+            android:name=".pages.SearchPersonActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".pages.SettingsActivity"
+            android:label="@string/settings" />
         <activity
             android:name=".pages.AboutDevActivity"
             android:label="@string/page_transaction_aboutDev"
@@ -21,10 +25,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".pages.TransactionHomeActivity" />
         </activity>
-        <activity
-            android:name=".pages.TransactionHomeActivity"
-            android:label="@string/page_transaction_home"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".pages.TransactionAddActivity"
             android:label="@string/page_transaction_add"
@@ -55,7 +55,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".pages.TransactionHomeActivity" />
         </activity>
-        <activity android:name=".pages.WelcomeActivity">
+        <activity
+            android:name=".pages.WelcomeActivity"
+            android:label="@string/page_welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -63,6 +65,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+        <!-- Transaction Home Activity -->
+        <activity
+            android:name=".pages.TransactionHomeActivity"
+            android:label="@string/page_transaction_home"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

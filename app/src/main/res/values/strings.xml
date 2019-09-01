@@ -3,6 +3,8 @@
     <!-- Pages' Name-->
     <string name="page_transaction_home">Transaction Home</string>
     <string name="page_transactions">Transactions</string>
+    <string name="page_welcome">Welcome Page</string>
+
     <!-- Pages' Name-->
     <string name="welcome_msg">Hi! I am your Personal Accountant!\n You can call me PA!</string>
     <string name="account_open_msg">Open New Account!</string>
@@ -56,5 +58,17 @@
     <string name="english">English</string>
     <string name="transaction_type">Transaction Type</string>
     <string name="account_open">Done</string>
+    <string name="accounts_breakdown">Accounts Breakdown</string>
+    <string name="transactions_breakdown">Transactions Breakdown</string>
+
+
+    <string name="warning_transaction_add_entry">Please enter Amount and Description Correctly!</string>
+    <string name="warning_account_open_phone_name_entry">Please enter Phone and Name Correctly!</string>
+    <string name="warning_account_open_phone_entry">Please enter Phone Correctly!</string>
+    <string name="warning_account_open_name_entry">\"Please enter Name Correctly!</string>
+    <string name="warning_account_open_amount_entry">\"Please enter Amount Correctly!</string>
+    <string name="error_msg">Error Message</string>
+    <string name="search_hint">Number or Name</string>
+    <string name="search">Search</string>
 
 </resources>

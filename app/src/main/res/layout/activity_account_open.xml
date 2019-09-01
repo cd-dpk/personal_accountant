@@ -14,23 +14,13 @@
         android:layout_gravity="center"
         android:layout_margin="@dimen/page_margin"
         android:weightSum="4">
-        <include
-            android:id="@+id/account_open_progress_view"
-            layout="@layout/view_progress_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            android:layout_weight="1"
-            >
-        </include>
         <LinearLayout
             android:id="@+id/account_open_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:layout_gravity="center"
-            android:layout_marginTop="100dp"
+            android:paddingTop="100dp"
             android:weightSum="3"
             android:orientation="vertical">
             <com.google.android.material.textfield.TextInputLayout
@@ -124,5 +114,18 @@
                 android:layout_weight="1"
                 android:text="@string/account_open" />
         </LinearLayout>
+
+        <include
+            android:id="@+id/account_open_progress_view"
+            layout="@layout/view_progress_bar"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_weight="1"
+            >
+        </include>
+
     </LinearLayout>
 </LinearLayout>

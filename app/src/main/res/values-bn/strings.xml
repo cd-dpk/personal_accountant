@@ -3,6 +3,8 @@
     <!-- Pages' Name-->
     <string name="page_transaction_home">লেনদেন হোম</string>
     <string name="page_transactions">লেনদেন</string>
+    <string name="page_welcome">স্বাগতম পেজ</string>
+
     <!-- Pages' Name-->
     <string name="welcome_msg">স্বাগতম! আমি আপনার আচ্চউতান্ত!\n</string>
     <string name="account_open_msg">নতুন অ্যাকাউন্ট খুলুন!</string>
@@ -56,5 +58,18 @@
     <string name="english">ইংরেজি</string>
     <string name="transaction_type">লেনদেনের ধরণ</string>
     <string name="account_open">অ্যাকাউন্ট খুলুন</string>
+    <string name="accounts_breakdown">অ্যাকাউন্ট বিস্তারিত</string>
+    <string name="transactions_breakdown">লেনদেন বিস্তারিত</string>
+
+
+    <string name="warning_transaction_add_entry">লেনদেনের পরিমাণ ও বর্ণনা উল্লেখ্য করুণ!</string>
+    <string name="warning_account_open_phone_name_entry">নাম ও ফোন নাম্বার উল্লেখ্য করুণ!</string>
+    <string name="warning_account_open_phone_entry">ফোন নাম্বার উল্লেখ্য করুণ!</string>
+    <string name="warning_account_open_name_entry">নাম উল্লেখ্য করুণ!</string>
+    <string name="warning_account_open_amount_entry">লেনদেনের পরিমাণ উল্লেখ্য করুণ!</string>
+
+    <string name="error_msg">ভুলের বর্ণনা</string>
+    <string name="search_hint">ফোন নাম্বার অথবা নাম</string>
+    <string name="search">খুজুন</string>
 
 </resources>

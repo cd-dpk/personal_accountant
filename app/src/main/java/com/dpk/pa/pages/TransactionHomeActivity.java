@@ -1,5 +1,7 @@
 package com.dpk.pa.pages;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -33,7 +35,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +47,7 @@ public class TransactionHomeActivity extends AppCompatActivity
 
     NavigationView navigationView;
     RecyclerView accountRecyclerView;
+    RecyclerViewListAdapter accountRecyclerViewListAdapter;
     List<Account> accounts = new ArrayList<Account>();
     View cardAccountView;
     PersonalAccountant personalAccountant;
@@ -50,10 +55,12 @@ public class TransactionHomeActivity extends AppCompatActivity
     TextView loggedPersonPhoneText;
     TextView loggedPersonNameText;
 
+    private static long BACK_PRESSED_AT, TIME_INTERVAL=2000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -69,7 +76,6 @@ public class TransactionHomeActivity extends AppCompatActivity
         accountRecyclerView.setHasFixedSize(true);
 
         // Data
-        personalAccountant = new PersonalAccountant(this);
         AccountTable exclusiveAccount = personalAccountant.getLoggedAccount();
         Account myAccount = new Account(exclusiveAccount);
         myAccount.setGivenTo(personalAccountant.getTotalAmountGivenTo(exclusiveAccount));
@@ -82,7 +88,7 @@ public class TransactionHomeActivity extends AppCompatActivity
         }
         // Data
         setAccountCardView(myAccount);
-        RecyclerViewListAdapter accountRecyclerViewListAdapter = new RecyclerViewListAdapter(
+        accountRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this, R.layout.card_account,accounts.size());
         accountRecyclerView.setAdapter(accountRecyclerViewListAdapter);
 
@@ -94,7 +100,9 @@ public class TransactionHomeActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         setupNavigationHeader(personalAccountant.getLoggedAccount());
+
     }
+
 
     @Override
     public void onBackPressed() {
@@ -102,13 +110,24 @@ public class TransactionHomeActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (BACK_PRESSED_AT + TIME_INTERVAL > System.currentTimeMillis())
+            {
+                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                homeIntent.addCategory( Intent.CATEGORY_HOME );
+                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+            }
+            else {
+                Toast.makeText(getBaseContext(), "Tap back button in order to exit", Toast.LENGTH_SHORT).show();
+            }
+            BACK_PRESSED_AT = System.currentTimeMillis();
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu;
+        // this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
@@ -119,10 +138,13 @@ public class TransactionHomeActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent intent = new Intent(TransactionHomeActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.action_search){
+            Intent intent = new Intent(TransactionHomeActivity.this, SearchPersonActivity.class);
             startActivity(intent);
         }
 
@@ -189,7 +211,7 @@ public class TransactionHomeActivity extends AppCompatActivity
         }
         textHorizontalLineView = (View) findViewById(R.id.content_account_list_text_horizontal_line);
         detailedAccountsTransactions = (TextView) textHorizontalLineView.findViewById(R.id.text_horizontal_line_text);
-        detailedAccountsTransactions.setText("Transactions Breakdown");
+        detailedAccountsTransactions.setText(R.string.accounts_breakdown);
     }
 
     @Override
@@ -231,5 +253,13 @@ public class TransactionHomeActivity extends AppCompatActivity
             Intent intent = new Intent(TransactionHomeActivity.this, WelcomeActivity.class);
             startActivity(intent);
         }
+    }
+
+    private void search(String query) {
+        Log.d("FIND",query);
+        accounts.remove(accounts.size()-1);
+        accountRecyclerViewListAdapter = new RecyclerViewListAdapter(
+                this, R.layout.card_account,accounts.size());
+        accountRecyclerView.setAdapter(accountRecyclerViewListAdapter);
     }
 }

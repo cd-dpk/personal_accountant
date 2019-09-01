@@ -77,8 +77,8 @@ public class TransactionAddActivity extends AppCompatActivity implements IRegist
         transactionAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (amountText.getText().equals("") && descriptionText.getText().toString().equals("")) {
-                    Toast.makeText(TransactionAddActivity.this, "Please enter Amount and Description Correctly!",
+                if (amountText.getText().toString().equals("") && descriptionText.getText().toString().equals("")) {
+                    Toast.makeText(TransactionAddActivity.this, R.string.warning_transaction_add_entry,
                             Toast.LENGTH_LONG).show();
                 }
                 else {

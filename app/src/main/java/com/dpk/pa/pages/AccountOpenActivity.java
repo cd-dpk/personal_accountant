@@ -62,17 +62,17 @@ public class AccountOpenActivity extends AppCompatActivity implements IRegistrat
                 name = nameText.getText().toString();
                 description = descriptionText.getText().toString();
                 if (phone.equals("") && name.equals("") && amountText.getText().toString().equals("")) {
-                    Toast.makeText(AccountOpenActivity.this, "Please enter Phone and Name Correctly!",
+                    Toast.makeText(AccountOpenActivity.this, R.string.warning_account_open_phone_name_entry,
                             Toast.LENGTH_LONG).show();
 //                    phoneText.setFocusable(true);
                 } else if (phone.equals("")) {
-                    Toast.makeText(AccountOpenActivity.this, "Please enter Phone Correctly!",
+                    Toast.makeText(AccountOpenActivity.this, R.string.warning_account_open_phone_entry,
                             Toast.LENGTH_LONG).show();
                 } else if (name.equals("")) {
-                    Toast.makeText(AccountOpenActivity.this, "Please enter Name Correctly!",
+                    Toast.makeText(AccountOpenActivity.this, R.string.warning_account_open_name_entry,
                             Toast.LENGTH_LONG).show();
                 } else if (amountText.getText().toString().equals("")) {
-                    Toast.makeText(AccountOpenActivity.this, "Please enter Amount Correctly!",
+                    Toast.makeText(AccountOpenActivity.this, R.string.warning_account_open_amount_entry,
                             Toast.LENGTH_LONG).show();
                 } else {
                     // TODO create account

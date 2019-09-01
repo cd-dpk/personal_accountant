@@ -105,7 +105,7 @@ public class TransactionListActivity extends AppCompatActivity implements OnRecy
         rightArrowButton = (ImageButton) findViewById(R.id.button_card_account_right_arrow);
         amountNetText = (TextView) findViewById(R.id.text_view_card_account_account_amount_net);
 
-        detailedTransactionsText.setText("Transactions Breakdown");
+        detailedTransactionsText.setText(R.string.transactions_breakdown);
         phoneText.setText(account.getPhone());
         nameText.setText(account.getName());
         givenToText.setText(account.getGivenTo()+"");
