@@ -71,5 +71,6 @@
     <string name="error_msg">ভুলের বর্ণনা</string>
     <string name="search_hint">ফোন নাম্বার অথবা নাম</string>
     <string name="search">খুজুন</string>
+    <string name="page_about_search">অ্যাপ সার্চ</string>
 
 </resources>

@@ -70,5 +70,6 @@
     <string name="error_msg">Error Message</string>
     <string name="search_hint">Number or Name</string>
     <string name="search">Search</string>
+    <string name="page_about_search">App Search</string>
 
 </resources>

@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".pages.SearchPersonActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/page_about_search"
+            android:parentActivityName=".pages.TransactionHomeActivity"></activity>
         <activity
             android:name=".pages.SettingsActivity"
             android:label="@string/settings" />
