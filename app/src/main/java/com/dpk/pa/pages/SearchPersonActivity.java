@@ -33,6 +33,7 @@ public class SearchPersonActivity extends AppCompatActivity implements OnRecycle
     RecyclerView accountRecyclerView;
     RecyclerViewListAdapter accountRecyclerViewListAdapter;
     List<Account> accounts = new ArrayList<Account>();
+    List<Account> searchedAccounts = new ArrayList<Account>();
     PersonalAccountant personalAccountant;
 
     @Override
@@ -65,8 +66,9 @@ public class SearchPersonActivity extends AppCompatActivity implements OnRecycle
             account.setTakenFrom(personalAccountant.getTotalAmountTakenFrom(new AccountTable(account),exclusiveAccount));
         }
         // Data
+        searchedAccounts = accounts;
         accountRecyclerViewListAdapter = new RecyclerViewListAdapter(
-                this, R.layout.card_account,accounts.size());
+                this, R.layout.card_account, searchedAccounts.size());
         accountRecyclerView.setAdapter(accountRecyclerViewListAdapter);
 
         arrowBackSearchButton.setOnClickListener(new View.OnClickListener() {
@@ -79,10 +81,15 @@ public class SearchPersonActivity extends AppCompatActivity implements OnRecycle
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
             @Override
             public void afterTextChanged(Editable string) {
-                String text = string.toString();
+                String searchText = string.toString();
+                Log.d("SEARCH", searchText);
+                searchedAccounts = personalAccountant.searchedAccounts(searchText, accounts);
+                accountRecyclerViewListAdapter = new RecyclerViewListAdapter(SearchPersonActivity.this,
+                        R.layout.card_account, searchedAccounts.size());
+                accountRecyclerView.setAdapter(accountRecyclerViewListAdapter);
 
             }
         });
@@ -96,7 +103,7 @@ public class SearchPersonActivity extends AppCompatActivity implements OnRecycle
     }
     @Override
     public void listenItem(View view, final int position) {
-        Account account = accounts.get(position);
+        Account account = searchedAccounts.get(position);
         TextView phoneText, nameText, givenToText, takenFromText, amountNetText;
         ImageButton rightArrowButton;
         phoneText = (TextView) view.findViewById(R.id.text_view_card_account_phone);

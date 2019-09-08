@@ -1,7 +1,5 @@
 package com.dpk.pa.pages;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -14,7 +12,6 @@ import com.dpk.pa.data_models.Account;
 import com.dpk.pa.data_models.IRegistration;
 import com.dpk.pa.data_models.OnRecyclerViewItemListener;
 import com.dpk.pa.data_models.db.AccountTable;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import android.util.Log;
 import android.view.View;

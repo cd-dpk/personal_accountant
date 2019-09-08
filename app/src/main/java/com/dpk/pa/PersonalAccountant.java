@@ -15,7 +15,9 @@ import com.dpk.pa.data_models.db.ITable;
 import com.dpk.pa.data_models.db.TransactionTable;
 import com.dpk.pa.data_models.db.Tuple;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -248,5 +250,26 @@ public class PersonalAccountant {
         android.content.res.Configuration conf = res.getConfiguration();
         conf.locale = new Locale(language_code.toLowerCase());
         res.updateConfiguration(conf, dm);
+    }
+
+    public List<Account> searchedAccounts(String searchString, List<Account>toSearchAccounts){
+        List<Account> searchedAccounts = new ArrayList<Account>();
+        if (searchString.equals("")) return toSearchAccounts;
+        String [] searchTokens = searchString.split("\\s+");
+        Log.d("TOK",searchString+","+ Arrays.toString(searchTokens));
+        for (Account account: toSearchAccounts){
+            boolean isSearched = false;
+            for (String token :
+                    searchTokens) {
+                Log.d("TOKENS", token);
+                if (account.getName().toLowerCase().matches(".*"+token.toLowerCase()+".*") ||
+                        account.getPhone().matches(".*"+token.toLowerCase()+".*")){
+                    isSearched =true;
+                }
+            }
+            if (isSearched)
+                searchedAccounts.add(account);
+        }
+        return searchedAccounts;
     }
 }
