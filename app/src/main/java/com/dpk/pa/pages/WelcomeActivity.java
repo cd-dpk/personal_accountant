@@ -1,6 +1,7 @@
 package com.dpk.pa.pages;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -17,6 +18,7 @@ import com.dpk.pa.data.constants.ApplicationConstants;
 import com.dpk.pa.data.constants.RegistrationConstants;
 import com.dpk.pa.data_models.IRegistration;
 import com.dpk.pa.data_models.db.AccountTable;
+import com.google.android.material.snackbar.Snackbar;
 
 public class WelcomeActivity extends AppCompatActivity implements IRegistration {
 
@@ -25,6 +27,7 @@ public class WelcomeActivity extends AppCompatActivity implements IRegistration 
     String phone="", name="";
     View progressView ;
     PersonalAccountant personalAccountant;
+    CoordinatorLayout coordinatorLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,7 @@ public class WelcomeActivity extends AppCompatActivity implements IRegistration 
 
         checkRegistration(personalAccountant);
 
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinate_layout_welcome);
         phoneText = (EditText) findViewById(R.id.edit_text_phone_number);
         nameText = (EditText) findViewById(R.id.edit_text_name);
         okayButton = findViewById(R.id.button_okay);
@@ -46,19 +50,31 @@ public class WelcomeActivity extends AppCompatActivity implements IRegistration 
                 phone = phoneText.getText().toString();
                 name = nameText.getText().toString();
                 if (phone.equals("") && name.equals("")){
-                    Toast.makeText(WelcomeActivity.this, "Please enter Phone and Name Correctly!",
-                            Toast.LENGTH_LONG).show();
+                    /*Toast.makeText(WelcomeActivity.this, "Please enter Phone and Name Correctly!",
+                            Toast.LENGTH_LONG).show();*/
+                    Snackbar.
+                            make(coordinatorLayout,R.string.warning_account_open_phone_name_entry,Snackbar.LENGTH_LONG)
+                            .show();
                 }
                 else if (phone.equals("")){
-                    Toast.makeText(WelcomeActivity.this, "Please enter Phone Correctly!",
-                            Toast.LENGTH_LONG).show();
+                    /*Toast.makeText(WelcomeActivity.this, "Please enter Phone Correctly!",
+                            Toast.LENGTH_LONG).show();*/
+                    Snackbar.
+                            make(coordinatorLayout,R.string.warning_account_open_phone_entry,Snackbar.LENGTH_LONG)
+                            .show();
                 }
                 else if (name.equals("")){
-                    Toast.makeText(WelcomeActivity.this, "Please enter Phone Correctly!",
-                            Toast.LENGTH_LONG).show();
+                    /*Toast.makeText(WelcomeActivity.this, "Please enter Name Correctly!",
+                            Toast.LENGTH_LONG).show();*/
+                    Snackbar.
+                            make(coordinatorLayout,R.string.warning_account_open_name_entry,Snackbar.LENGTH_LONG)
+                            .show();
                 }
                 else {
-                    Toast.makeText(WelcomeActivity.this, "Correct!",Toast.LENGTH_LONG).show();
+                   /* Toast.makeText(WelcomeActivity.this, "Correct!",Toast.LENGTH_LONG).show();
+                    Snackbar.
+                            make(coordinatorLayout,R.string.warning_account_open_phone_entry,Snackbar.LENGTH_LONG)
+                            .show();*/
                     AccountTable accountTable = new AccountTable(phone, name);
                     new SwitchingActivityAsyncTask(accountTable).execute();
                 }

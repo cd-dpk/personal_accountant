@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:theme="@style/AppTheme.GrayColorPrimary"
-    tools:context="com.dpk.pa.pages.AccountOpenActivity">
+    tools:context="com.dpk.pa.pages.AccountOpenActivity"
+    android:id="@+id/coordinate_layout_account_open">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/page_margin"
-        android:weightSum="4">
+        android:padding="10dp"
+        android:weightSum="5">
         <LinearLayout
             android:id="@+id/account_open_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:layout_gravity="center"
-            android:paddingTop="100dp"
             android:weightSum="3"
             android:orientation="vertical">
             <com.google.android.material.textfield.TextInputLayout
@@ -32,6 +30,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:shadowColor="@android:color/holo_red_light"
+                    android:inputType="phone"
                     android:id="@+id/edit_text_phone_number_open"
                     android:hint="@string/account_open_phone_display"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -74,58 +73,114 @@
                     android:hint="@string/account_open_description_display"
                     />
             </com.google.android.material.textfield.TextInputLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:elevation="5dp"
+                android:layout_marginBottom="5dp"
+                app:cardCornerRadius="2dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/transaction_type"
+                        android:layout_weight="1"/>
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/account_open_transaction_type_rb"
+                        android:checkedButton="@+id/account_open_transaction_type_given"
+                        android:orientation="horizontal"
+                        android:layout_weight="2">
+                        <RadioButton
+                            android:id="@+id/account_open_transaction_type_given"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/transaction_type_passive_given"/>
+                        <RadioButton
+                            android:id="@+id/account_open_transaction_type_taken"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/transaction_type_passive_taken"/>
+                    </RadioGroup>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="5dp"
+            android:layout_marginBottom="5dp"
+            app:cardCornerRadius="2dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3">
-                <TextView
-                    android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:weightSum="2">
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/transaction_type"
-                    android:layout_weight="1"/>
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:weightSum="2">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/transaction_date"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/transaction_time_text_view_picked_date"
+                        android:text="@string/transaction_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+                </LinearLayout>
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/account_open_transaction_type_rb"
-                    android:checkedButton="@+id/account_open_transaction_type_given"
+                    android:id="@+id/rg_transaction_time"
+                    android:checkedButton="@+id/rb_transaction_time_now"
                     android:orientation="horizontal"
-                    android:layout_weight="2">
+                    android:layout_gravity="center"
+                    android:layout_weight="1">
                     <RadioButton
-                        android:id="@+id/account_open_transaction_type_given"
+                        android:id="@+id/rb_transaction_time_now"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/transaction_type_passive_given"/>
+                        android:text="@string/transaction_time_now"/>
                     <RadioButton
-                        android:id="@+id/account_open_transaction_type_taken"
+                        android:id="@+id/rb_transaction_time_another_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/transaction_type_passive_taken"/>
+                        android:text="@string/transaction_time_another_time"/>
                 </RadioGroup>
             </LinearLayout>
-            <Button
-                android:id="@+id/button_open"
-                android:drawableLeft="@drawable/plus_green"
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="@string/account_open" />
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <include
             android:id="@+id/account_open_progress_view"
             layout="@layout/view_progress_bar"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:visibility="gone"
-            android:layout_weight="1"
-            >
+            android:layout_weight="1">
         </include>
-
+        <include
+            android:id="@+id/account_open_error_message_view"
+            layout="@layout/view_error_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_weight="1">
+        </include>
     </LinearLayout>
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

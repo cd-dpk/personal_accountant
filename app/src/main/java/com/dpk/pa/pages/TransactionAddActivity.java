@@ -1,12 +1,22 @@
 package com.dpk.pa.pages;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.DialogFragment;
 
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -23,10 +33,10 @@ import com.dpk.pa.data_models.IRegistration;
 import com.dpk.pa.data_models.db.AccountTable;
 import com.dpk.pa.data_models.db.TransactionTable;
 import com.dpk.pa.utils.TimeHandler;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
-
-public class TransactionAddActivity extends AppCompatActivity implements IRegistration {
+public class TransactionAddActivity extends AppCompatActivity implements IRegistration, DatePickerDialog.OnDateSetListener {
 
     String transactionDescription;
     String amount;
@@ -34,27 +44,38 @@ public class TransactionAddActivity extends AppCompatActivity implements IRegist
     View progressView;
     View cardAccountView;
     TextInputEditText descriptionText, amountText;
-    RadioGroup transactionTypeRadioGroup;
-    RadioButton transactionTypeGivenRadioButton, transactionTypeTakenRadioButton;
-    Button transactionAddButton;
+    RadioGroup transactionTypeRadioGroup, transactionTimeRadioGroup;
+    RadioButton transactionTypeGivenRadioButton,
+            transactionTypeTakenRadioButton,
+            transactionTimeNowRadioButton,
+            transactionTimeAnotherRadioButton;
     AccountTable loggedAccount, targetAccount;
     String loggedPerson="", targetPerson="";
-
+    TextView transactionTimeTextView;
+    CoordinatorLayout coordinatorLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_add);
+
         personalAccountant = new PersonalAccountant(TransactionAddActivity.this);
         personalAccountant.setLanguageInApp();
+
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinate_layout);
 
         progressView = (View) findViewById(R.id.transaction_add_progress_view);
         transactionTypeRadioGroup = (RadioGroup) findViewById(R.id.rg_transaction_add_type);
         transactionTypeGivenRadioButton = (RadioButton) findViewById(R.id.rb_transaction_add_type_given);
         transactionTypeTakenRadioButton = (RadioButton) findViewById(R.id.rb_transaction_add_type_taken);
+
+        transactionTimeRadioGroup = (RadioGroup) findViewById(R.id.rg_transaction_time);
+        transactionTimeNowRadioButton = (RadioButton) findViewById(R.id.rb_transaction_time_now);
+        transactionTimeAnotherRadioButton = (RadioButton) findViewById(R.id.rb_transaction_time_another_time);
+        transactionTimeTextView = (TextView) findViewById(R.id.transaction_time_text_view_picked_date);
+
         cardAccountView = (View) findViewById(R.id.view_card_account);
         amountText = (TextInputEditText) findViewById(R.id.edit_text_transaction_add_amount);
         descriptionText  = (TextInputEditText) findViewById(R.id.edit_text_transaction_add_description);
-        transactionAddButton = (Button) findViewById(R.id.button_transaction_add_add);
 
         loggedPerson = ApplicationConstants.LOGGED_PHONE_NUMBER;
         targetPerson = ApplicationConstants.TARGET_USER_PHONE;
@@ -72,35 +93,34 @@ public class TransactionAddActivity extends AppCompatActivity implements IRegist
         targetAccount.setPhone(targetPerson);
         Account targetPersonAccount = personalAccountant.getTargetAccountDetails(targetAccount, loggedAccount);
         setAccountCardView(targetPersonAccount);
+        transactionTimeTextView.setText(TimeHandler.now());
         // Data
 
-        transactionAddButton.setOnClickListener(new View.OnClickListener() {
+        transactionTimeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                if (amountText.getText().toString().equals("") && descriptionText.getText().toString().equals("")) {
-                    Toast.makeText(TransactionAddActivity.this, R.string.warning_transaction_add_entry,
-                            Toast.LENGTH_LONG).show();
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (i == R.id.rb_transaction_time_now){
+                    transactionTimeTextView.setText(TimeHandler.now());
                 }
-                else {
-                    amount = amountText.getText().toString();
-                    transactionDescription = descriptionText.getText().toString();
-                    TransactionTable transactionTable = new TransactionTable();
+                else  if(i == R.id.rb_transaction_time_another_time){
+//                    DialogFragment newFragment = new DatePickerFragment();
+//                    newFragment.show(getSupportFragmentManager(), "datePicker");
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(TransactionAddActivity.this,
+                            R.style.MyDialogTheme ,
+                            TransactionAddActivity.this,
+                            TimeHandler.year(),
+                            TimeHandler.month(),
+                            TimeHandler.day());
 
-                    if (transactionTypeRadioGroup.getCheckedRadioButtonId() == transactionTypeGivenRadioButton.getId()) {
-                        transactionTable.setGiverPhone(ApplicationConstants.LOGGED_PHONE_NUMBER);
-                        transactionTable.setTakerPhone(targetAccount.getPhone());
-                    } else {
-                        transactionTable.setTakerPhone(ApplicationConstants.LOGGED_PHONE_NUMBER);
-                        transactionTable.setGiverPhone(targetAccount.getPhone());
-                    }
+                    datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            transactionTimeNowRadioButton.setChecked(true);
+                            transactionTimeTextView.setText(TimeHandler.now());
+                        }
+                    });
 
-                    transactionTable.setAmount(Double.parseDouble(amount));
-                    transactionTable.setDescription(transactionDescription);
-                    transactionTable.setEntryTime(TimeHandler.now());
-                    transactionTable.setTransactionId(transactionTable.generateTransactionID());
-
-                    Log.d("TRANSACTION", transactionTable.toString());
-                    new TransactionAddBGTask(transactionTable).execute();
+                    datePickerDialog.show();
                 }
             }
         });
@@ -113,6 +133,49 @@ public class TransactionAddActivity extends AppCompatActivity implements IRegist
             Intent intent = new Intent(this, WelcomeActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.transaction_add,menu);
+        return true;
+    }
+
+    @SuppressLint("ResourceAsColor")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_transaction_add){
+            if (amountText.getText().toString().equals("") && descriptionText.getText().toString().equals("")) {
+//                Toast.makeText(TransactionAddActivity.this, R.string.warning_transaction_add_entry,
+//                        Toast.LENGTH_LONG).show();
+                Snackbar.make(coordinatorLayout, R.string.warning_transaction_add_entry, Snackbar.LENGTH_LONG)
+                        .show();
+            }
+            else {
+                amount = amountText.getText().toString();
+                transactionDescription = descriptionText.getText().toString();
+                TransactionTable transactionTable = new TransactionTable();
+
+                if (transactionTypeRadioGroup.getCheckedRadioButtonId() == transactionTypeGivenRadioButton.getId()) {
+                    transactionTable.setGiverPhone(ApplicationConstants.LOGGED_PHONE_NUMBER);
+                    transactionTable.setTakerPhone(targetAccount.getPhone());
+                } else {
+                    transactionTable.setTakerPhone(ApplicationConstants.LOGGED_PHONE_NUMBER);
+                    transactionTable.setGiverPhone(targetAccount.getPhone());
+                }
+
+                transactionTable.setAmount(Double.parseDouble(amount));
+                transactionTable.setDescription(transactionDescription);
+                transactionTable.setEntryTime(transactionTimeTextView.getText().toString());
+                transactionTable.setTransactionId(transactionTable.generateTransactionID());
+
+                Log.d("TRANSACTION", transactionTable.toString());
+                new TransactionAddBGTask(transactionTable).execute();
+            }
+
+        }
+        return true;
     }
 
     private void setAccountCardView(Account account) {
@@ -138,6 +201,15 @@ public class TransactionAddActivity extends AppCompatActivity implements IRegist
         }
         rightArrowButton.setVisibility(View.GONE);
     }
+
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        transactionTimeTextView.setText(Integer.toString(year)+"-"+
+                Integer.toString((month+1)%12)+"-"+
+                Integer.toString(day));
+    }
+
     private class TransactionAddBGTask extends AsyncTask<String, String, String> {
         TransactionTable transactionTable;
 

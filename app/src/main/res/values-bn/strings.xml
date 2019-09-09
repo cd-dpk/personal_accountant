@@ -61,7 +61,6 @@
     <string name="accounts_breakdown">অ্যাকাউন্ট বিস্তারিত</string>
     <string name="transactions_breakdown">লেনদেন বিস্তারিত</string>
 
-
     <string name="warning_transaction_add_entry">লেনদেনের পরিমাণ ও বর্ণনা উল্লেখ্য করুণ!</string>
     <string name="warning_account_open_phone_name_entry">নাম ও ফোন নাম্বার উল্লেখ্য করুণ!</string>
     <string name="warning_account_open_phone_entry">ফোন নাম্বার উল্লেখ্য করুণ!</string>
@@ -72,5 +71,11 @@
     <string name="search_hint">ফোন নাম্বার অথবা নাম</string>
     <string name="search">খুজুন</string>
     <string name="page_about_search">অ্যাপ সার্চ</string>
-
+    <string name="account_exist">একই ফোন নম্বর নিয়ে অ্যাকাউন্ট আছে!</string>
+    <string name="unknown_error">অজানা সমস্যা!</string>
+    <string name="pick_date">Transaction Time</string>
+    <string name="transaction_time_now">Now</string>
+    <string name="transaction_time_another_time">Another Time</string>
+    <string name="cancel">Cancel</string>
+    <string name="back">Back</string>
 </resources>

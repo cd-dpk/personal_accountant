@@ -12,4 +12,7 @@ public class ApplicationConstants {
     public static String LANGUAGE_CODE =LANGUAGE_CODE_ENGLISH;
 
 
+    public static final String ACCOUNT_EXIST_ERROR="account_exist";
+
+
 }

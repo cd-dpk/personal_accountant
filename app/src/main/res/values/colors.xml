@@ -8,4 +8,6 @@
     <color name="grey">#808080</color>
     <color name="black">#000000</color>
     <color name="trans">#00000000</color>
+    <color name="indigo">#4b0082</color>
+    <color name="pink">#FF1493</color>
 </resources>
