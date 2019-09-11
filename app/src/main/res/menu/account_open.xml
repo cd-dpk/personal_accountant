@@ -4,6 +4,6 @@
     <item
         android:id="@+id/menu_account_open"
         android:title="@string/account_open"
-        android:icon="@drawable/done_green"
+        android:icon="@drawable/baseline_done_white_48"
         app:showAsAction="always" />
 </menu>

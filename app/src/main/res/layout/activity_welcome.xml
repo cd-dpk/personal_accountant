@@ -44,11 +44,15 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:counterEnabled="true"
+                app:counterMaxLength="11"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHighlight="@color/colorPrimary"
+                    android:inputType="phone"
+                    android:maxLength="11"
                     android:id="@+id/edit_text_phone_number"
                     android:hint="@string/account_open_phone_display"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -65,13 +69,16 @@
                     />
             </com.google.android.material.textfield.TextInputLayout>
             <Button
+                android:layout_marginTop="5dp"
                 android:layout_gravity="center"
                 android:layout_width="@dimen/button_width"
                 android:layout_height="@dimen/button_height"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@android:color/holo_red_light"
                 android:id="@+id/button_okay"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/done_green"
-                android:text="OK"/>
+                android:drawableLeft="@drawable/baseline_done_white_24"
+                android:text="@string/register"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

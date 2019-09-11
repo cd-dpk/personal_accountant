@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/search_bar_height"
             android:hint="Search"
-            android:textColor="@color/black"
+            android:textColor="@color/grey"
             android:id="@+id/edit_text_search"/>
     </LinearLayout>
     <include layout="@layout/content_account_list"

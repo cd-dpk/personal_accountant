@@ -8,6 +8,6 @@
         app:showAsAction="never" />
     <item android:id="@+id/action_search"
         android:title="@string/search"
-        android:icon="@drawable/baseline_search_black_24"
+        android:icon="@drawable/baseline_search_white_24"
         app:showAsAction="collapseActionView|ifRoom"/>
 </menu>

@@ -16,12 +16,14 @@ import com.dpk.pa.data_models.db.AccountTable;
 import android.util.Log;
 import android.view.View;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -48,7 +50,7 @@ public class TransactionHomeActivity extends AppCompatActivity
     List<Account> accounts = new ArrayList<Account>();
     View cardAccountView;
     PersonalAccountant personalAccountant;
-
+    CoordinatorLayout coordinatorLayout;
     TextView loggedPersonPhoneText;
     TextView loggedPersonNameText;
 
@@ -71,7 +73,7 @@ public class TransactionHomeActivity extends AppCompatActivity
         accountRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_account_list);
         accountRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         accountRecyclerView.setHasFixedSize(true);
-
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout_transaction_home);
         // Data
         AccountTable exclusiveAccount = personalAccountant.getLoggedAccount();
         Account myAccount = new Account(exclusiveAccount);
@@ -115,7 +117,8 @@ public class TransactionHomeActivity extends AppCompatActivity
                 startActivity(homeIntent);
             }
             else {
-                Toast.makeText(getBaseContext(), "Tap back button in order to exit", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getBaseContext(), "Tap back button in order to exit", Toast.LENGTH_SHORT).show();
+
             }
             BACK_PRESSED_AT = System.currentTimeMillis();
         }

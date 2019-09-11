@@ -4,7 +4,7 @@
 <item
     android:id="@+id/done"
     android:title="Done"
-    android:icon="@drawable/done_green"
+    android:icon="@drawable/baseline_done_white_48"
     app:showAsAction="always"
     />
 </menu>

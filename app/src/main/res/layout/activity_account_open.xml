@@ -24,6 +24,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:counterEnabled="true"
+                app:counterMaxLength="11"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -31,6 +33,7 @@
                     android:textColor="@android:color/black"
                     android:shadowColor="@android:color/holo_red_light"
                     android:inputType="phone"
+                    android:maxLength="11"
                     android:id="@+id/edit_text_phone_number_open"
                     android:hint="@string/account_open_phone_display"/>
             </com.google.android.material.textfield.TextInputLayout>

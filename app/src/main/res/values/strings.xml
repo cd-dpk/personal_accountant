@@ -78,5 +78,7 @@
     <string name="transaction_time_another_time">Not Now</string>
     <string name="cancel">Cancel</string>
     <string name="back">Back</string>
+    <string name="tap_exit">Tap back button again in order to exit</string>
+    <string name="register">Open</string>
 
 </resources>

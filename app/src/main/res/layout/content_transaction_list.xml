@@ -36,10 +36,11 @@
     </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/transaction_list_ft_add_transaction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/fab_width"
+        android:layout_height="@dimen/fab_height"
         android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/colorPrimary"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/plus_green" />
+        app:srcCompat="@drawable/baseline_add_white_18" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

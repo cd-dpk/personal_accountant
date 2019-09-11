@@ -53,6 +53,7 @@ public class TransactionAddActivity extends AppCompatActivity implements IRegist
     String loggedPerson="", targetPerson="";
     TextView transactionTimeTextView;
     CoordinatorLayout coordinatorLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,7 +126,6 @@ public class TransactionAddActivity extends AppCompatActivity implements IRegist
             }
         });
     }
-
     @Override
     public void checkRegistration(PersonalAccountant personalAccountant) {
         if (!personalAccountant.isRegistered()) {
