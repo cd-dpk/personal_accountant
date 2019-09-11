@@ -7,6 +7,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +18,6 @@ import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dpk.pa.PersonalAccountant;
 import com.dpk.pa.R;
@@ -40,7 +40,7 @@ public class AccountOpenActivity extends AppCompatActivity implements IRegistrat
             transactionTypeTakenRadioButton,
             transactionTimeNowRadioButton,
             transactionTimeAnotherRadioButton;
-    View progressView, errorMessageView;
+    View progressView, errorMessageView, transactionTypeView;
     TextView errorMessageTextView;
     PersonalAccountant personalAccountant;
     CoordinatorLayout coordinatorLayout;
@@ -62,10 +62,22 @@ public class AccountOpenActivity extends AppCompatActivity implements IRegistrat
         progressView = (View) findViewById(R.id.account_open_progress_view);
         errorMessageView = (View) findViewById(R.id.account_open_error_message_view);
         errorMessageTextView = (TextView) errorMessageView.findViewById(R.id.text_view_error_message);
+        transactionTypeView = (View) findViewById(R.id.card_view_account_open_type);
 
         transactionTypeRadioGroup = (RadioGroup) findViewById(R.id.account_open_transaction_type_rb);
         transactionTypeGivenRadioButton = (RadioButton) findViewById(R.id.account_open_transaction_type_given);
         transactionTypeTakenRadioButton = (RadioButton) findViewById(R.id.account_open_transaction_type_taken);
+
+        transactionTypeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (i == transactionTypeGivenRadioButton.getId()){
+                    transactionTypeView.setBackgroundColor(getResources().getColor(R.color.lime));
+                }else if(i == transactionTypeTakenRadioButton.getId()){
+                    transactionTypeView.setBackgroundColor(getResources().getColor(R.color.orangered));
+                }
+            }
+        });
 
         transactionTimeRadioGroup = (RadioGroup) findViewById(R.id.rg_transaction_time);
         transactionTimeNowRadioButton = (RadioButton) findViewById(R.id.rb_transaction_time_now);
@@ -116,7 +128,11 @@ public class AccountOpenActivity extends AppCompatActivity implements IRegistrat
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if (id == R.id.menu_account_open) {
+        if(id == R.id.menu_account_open_close){
+            Intent intent = new Intent(AccountOpenActivity.this, TransactionHomeActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.menu_account_open_done) {
             phone = phoneText.getText().toString();
             name = nameText.getText().toString();
             description = descriptionText.getText().toString();

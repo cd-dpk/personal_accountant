@@ -24,15 +24,15 @@
             android:visibility="gone"
             >
         </include>
-        <TextView
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/text_view_welcome_message"
-            android:paddingBottom="50dp"
-            android:text="@string/welcome_msg"
-            android:layout_weight="1"
-            />
+        <!--<TextView-->
+            <!--android:gravity="center"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/text_view_welcome_message"-->
+            <!--android:paddingBottom="50dp"-->
+            <!--android:text="@string/welcome_msg"-->
+            <!--android:layout_weight="1"-->
+            <!--/>-->
         <LinearLayout
             android:id="@+id/signup_group"
             android:layout_width="match_parent"
@@ -51,10 +51,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHighlight="@color/colorPrimary"
-                    android:inputType="phone"
+                    android:inputType="number"
                     android:maxLength="11"
                     android:id="@+id/edit_text_phone_number"
-                    android:hint="@string/account_open_phone_display"/>
+                    android:hint="@string/account_open_phone_own_hint"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -65,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/edit_text_name"
-                    android:hint="@string/account_open_name_display"
+                    android:hint="@string/account_open_name_own_hint"
                     />
             </com.google.android.material.textfield.TextInputLayout>
             <Button
@@ -73,8 +73,8 @@
                 android:layout_gravity="center"
                 android:layout_width="@dimen/button_width"
                 android:layout_height="@dimen/button_height"
-                android:backgroundTint="@color/colorPrimary"
-                android:textColor="@android:color/holo_red_light"
+                android:backgroundTint="@color/lime"
+                android:textColor="@android:color/white"
                 android:id="@+id/button_okay"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/baseline_done_white_24"

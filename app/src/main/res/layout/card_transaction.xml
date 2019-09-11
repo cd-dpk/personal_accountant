@@ -58,6 +58,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/transaction_type_passive_given_amount"
+                    android:textColor="@color/green"
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
@@ -81,6 +82,7 @@
                     android:layout_width="@dimen/card_account_due"
                     android:gravity="center"
                     android:layout_weight="1"
+                    android:textColor="@color/red"
                     android:text="@string/transaction_type_passive_taken_amount"
                     android:layout_height="wrap_content" />
             </LinearLayout>

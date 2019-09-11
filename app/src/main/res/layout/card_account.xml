@@ -35,6 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:textColor="@color/black"
                 android:text="@string/account_attr_phone" />
 
             <TextView
@@ -43,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:textColor="@color/black"
                 android:text="@string/account_attr_name" />
         </LinearLayout>
         <LinearLayout
@@ -68,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:textColor="@color/green"
                 android:text="@string/transaction_type_passive_given" />
         </LinearLayout>
         <LinearLayout
@@ -79,7 +82,6 @@
             android:weightSum="2"
             android:layout_gravity="center"
             android:layout_weight="1">
-
             <TextView
                 android:id="@+id/text_view_card_account_taken_from_label"
                 android:layout_width="@dimen/card_account_due_label"
@@ -87,13 +89,13 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/transaction_type_passive_taken" />
-
             <TextView
                 android:id="@+id/text_view_card_account_taken_from"
                 android:layout_width="@dimen/card_account_due"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:textColor="@color/red"
                 android:text="@string/transaction_type_passive_taken" />
         </LinearLayout>
         <LinearLayout

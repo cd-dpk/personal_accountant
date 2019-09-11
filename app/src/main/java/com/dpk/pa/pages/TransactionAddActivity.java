@@ -2,11 +2,9 @@ package com.dpk.pa.pages;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.fragment.app.DialogFragment;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -15,14 +13,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dpk.pa.PersonalAccountant;
 import com.dpk.pa.R;
@@ -42,7 +37,7 @@ public class TransactionAddActivity extends AppCompatActivity implements IRegist
     String amount;
     PersonalAccountant personalAccountant;
     View progressView;
-    View cardAccountView;
+    View cardAccountView, transactionTypeView;
     TextInputEditText descriptionText, amountText;
     RadioGroup transactionTypeRadioGroup, transactionTimeRadioGroup;
     RadioButton transactionTypeGivenRadioButton,
@@ -74,10 +69,11 @@ public class TransactionAddActivity extends AppCompatActivity implements IRegist
         transactionTimeAnotherRadioButton = (RadioButton) findViewById(R.id.rb_transaction_time_another_time);
         transactionTimeTextView = (TextView) findViewById(R.id.transaction_time_text_view_picked_date);
 
+
         cardAccountView = (View) findViewById(R.id.view_card_account);
         amountText = (TextInputEditText) findViewById(R.id.edit_text_transaction_add_amount);
         descriptionText  = (TextInputEditText) findViewById(R.id.edit_text_transaction_add_description);
-
+        transactionTypeView = (View) findViewById(R.id.card_view_transaction_add_type);
         loggedPerson = ApplicationConstants.LOGGED_PHONE_NUMBER;
         targetPerson = ApplicationConstants.TARGET_USER_PHONE;
 
@@ -96,6 +92,16 @@ public class TransactionAddActivity extends AppCompatActivity implements IRegist
         setAccountCardView(targetPersonAccount);
         transactionTimeTextView.setText(TimeHandler.now());
         // Data
+        transactionTypeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (i == transactionTypeGivenRadioButton.getId()){
+                    transactionTypeView.setBackgroundColor(getResources().getColor(R.color.lime));
+                }else if(i == transactionTypeTakenRadioButton.getId()){
+                    transactionTypeView.setBackgroundColor(getResources().getColor(R.color.orangered));
+                }
+            }
+        });
 
         transactionTimeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -145,7 +151,11 @@ public class TransactionAddActivity extends AppCompatActivity implements IRegist
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.menu_transaction_add){
+        if(id == R.id.menu_transaction_add_close){
+            Intent intent = new Intent(TransactionAddActivity.this, TransactionListActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.menu_transaction_add_done){
             if (amountText.getText().toString().equals("") && descriptionText.getText().toString().equals("")) {
 //                Toast.makeText(TransactionAddActivity.this, R.string.warning_transaction_add_entry,
 //                        Toast.LENGTH_LONG).show();

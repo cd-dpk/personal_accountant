@@ -15,11 +15,11 @@ import com.dpk.pa.data_models.db.TransactionTable;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -76,6 +76,12 @@ public class TransactionListActivity extends AppCompatActivity implements OnRecy
         });
 
     }
+
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_previous_transactions, menu);
+        return true;
+    }*/
 
     private void loadChangeableData(String targetPerson) {
         targetAccount=new AccountTable();

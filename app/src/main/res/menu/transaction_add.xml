@@ -2,8 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_transaction_add"
+        android:id="@+id/menu_transaction_add_done"
         android:title="@string/account_open"
         android:icon="@drawable/baseline_done_white_48"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_transaction_add_close"
+        android:title="@string/close"
+        android:icon="@drawable/baseline_close_white_48"
+        app:showAsAction="always" />
+
 </menu>

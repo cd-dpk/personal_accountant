@@ -80,4 +80,9 @@
     <string name="back">Back</string>
     <string name="tap_exit">Tap back button agin in order to exit</string>
     <string name="register">Open</string>
+    <string name="close">Close</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="account_open_phone_own_hint">Type your Phone Number</string>
+    <string name="account_open_name_own_hint">Type your Name</string>
 </resources>

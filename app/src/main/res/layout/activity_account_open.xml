@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:shadowColor="@android:color/holo_red_light"
-                    android:inputType="phone"
+                    android:inputType="number"
                     android:maxLength="11"
                     android:id="@+id/edit_text_phone_number_open"
                     android:hint="@string/account_open_phone_display"/>
@@ -81,11 +81,14 @@
                 android:layout_height="30dp"
                 android:elevation="5dp"
                 android:layout_marginBottom="5dp"
-                app:cardCornerRadius="2dp">
+                app:cardCornerRadius="2dp"
+                android:id="@+id/card_view_account_open_type"
+                app:cardBackgroundColor="@color/lime">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:padding="5dp"
                     android:weightSum="3">
                     <TextView
                         android:layout_width="wrap_content"
@@ -118,13 +121,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="5dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             app:cardCornerRadius="2dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:padding="5dp"
                 android:weightSum="2">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -136,11 +140,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textColor="@color/black"
                         android:text="@string/transaction_date"
                         android:layout_weight="1"/>
                     <TextView
                         android:id="@+id/transaction_time_text_view_picked_date"
                         android:text="@string/transaction_date"
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"/>
@@ -157,11 +163,13 @@
                         android:id="@+id/rb_transaction_time_now"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:text="@string/transaction_time_now"/>
                     <RadioButton
                         android:id="@+id/rb_transaction_time_another_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:text="@string/transaction_time_another_time"/>
                 </RadioGroup>
             </LinearLayout>

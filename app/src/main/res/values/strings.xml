@@ -3,7 +3,7 @@
     <!-- Pages' Name-->
     <string name="page_transaction_home">Transaction Home</string>
     <string name="page_transactions">Transactions</string>
-    <string name="page_welcome">Welcome Page</string>
+    <string name="page_welcome">Welcome</string>
 
     <!-- Pages' Name-->
     <string name="welcome_msg">Hi! I am your Personal Accountant!\n You can call me PA!</string>
@@ -80,5 +80,10 @@
     <string name="back">Back</string>
     <string name="tap_exit">Tap back button again in order to exit</string>
     <string name="register">Open</string>
+    <string name="close">Close</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="account_open_phone_own_hint">Type your Phone Number</string>
+    <string name="account_open_name_own_hint">Type your Name</string>
 
 </resources>
