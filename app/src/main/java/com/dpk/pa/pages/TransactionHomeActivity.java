@@ -198,7 +198,7 @@ public class TransactionHomeActivity extends AppCompatActivity
         takenFromText = (TextView) cardAccountView.findViewById(R.id.text_view_card_transaction_net_taken_from);
         amountNetText = (TextView) cardAccountView.findViewById(R.id.text_view_card_transaction_net_account_amount_net);
 
-        netTransactionTextView.setText("Net Transactions");
+        netTransactionTextView.setText(R.string.net_transactions);
         givenToText.setText(account.getGivenTo()+"");
         takenFromText.setText(account.getTakenFrom()+"");
         double diff = account.getGivenTo()-account.getTakenFrom();

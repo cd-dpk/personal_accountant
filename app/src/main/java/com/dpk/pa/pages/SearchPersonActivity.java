@@ -35,7 +35,8 @@ public class SearchPersonActivity extends AppCompatActivity implements OnRecycle
     List<Account> accounts = new ArrayList<Account>();
     List<Account> searchedAccounts = new ArrayList<Account>();
     PersonalAccountant personalAccountant;
-
+    TextView detailedAccountsTransactions;
+    View textHorizontalLineView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,10 @@ public class SearchPersonActivity extends AppCompatActivity implements OnRecycle
 
         arrowBackSearchButton = (ImageButton) findViewById(R.id.image_search_back);
         searchText = (EditText) findViewById(R.id.edit_text_search);
+        textHorizontalLineView = (View) findViewById(R.id.content_transaction_list_text_horizontal_line);
+        textHorizontalLineView = (View) findViewById(R.id.content_account_list_text_horizontal_line);
+        detailedAccountsTransactions = (TextView) textHorizontalLineView.findViewById(R.id.text_horizontal_line_text);
+        detailedAccountsTransactions.setText(R.string.accounts_breakdown);
 
         checkRegistration(personalAccountant);
 

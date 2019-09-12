@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">লেনদেন</string>
+    <string name="app_name">লেনদেন বুক</string>
     <!-- Pages' Name-->
-    <string name="page_transaction_home">লেনদেন হোম</string>
+    <string name="page_transaction_home">লেনদেন বুক</string>
     <string name="page_transactions">লেনদেন</string>
-    <string name="page_welcome">স্বাগতম পেজ</string>
+    <string name="page_welcome">@string/app_name</string>
 
     <!-- Pages' Name-->
     <string name="welcome_msg">স্বাগতম! আমি আপনার আচ্চউতান্ত!\n</string>
@@ -85,4 +85,5 @@
     <string name="delete">Delete</string>
     <string name="account_open_phone_own_hint">Type your Phone Number</string>
     <string name="account_open_name_own_hint">Type your Name</string>
+    <string name="net_transactions">নীট লেনেদেন</string>
 </resources>

@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">Transaction</string>
+    <string name="app_name">Transaction Book</string>
     <!-- Pages' Name-->
-    <string name="page_transaction_home">Transaction Home</string>
+    <string name="page_transaction_home">@string/app_name</string>
     <string name="page_transactions">Transactions</string>
-    <string name="page_welcome">Welcome</string>
+    <string name="page_welcome">@string/app_name</string>
 
     <!-- Pages' Name-->
     <string name="welcome_msg">Hi! I am your Personal Accountant!\n You can call me PA!</string>
@@ -85,5 +85,6 @@
     <string name="delete">Delete</string>
     <string name="account_open_phone_own_hint">Type your Phone Number</string>
     <string name="account_open_name_own_hint">Type your Name</string>
+    <string name="net_transactions">Net Transactions</string>
 
 </resources>
